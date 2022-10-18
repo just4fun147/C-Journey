@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-B-200710755//
+
+void prosedurTukarIsi(int var1,int var2);
+
+
+int main() {
+	int a=2, b=5, c=7,d=10;
+	
+	prosedurTukarIsi(a,b);
+	prosedurTukarIsi(c,d);
+	prosedurTukarIsi(a,c);
+	prosedurTukarIsi(a,d);
+	
+}
+
+prosedurTukarIsi(int var1, int var2){
+	int c;
+	
+	c=var2;
+	var2=var1;
+	var1=c;
+	printf("Hasil Setelah ditukar (Sesuai Urutan: var1 - var2): %d - %d \n",var1,var2);
+	
+}
+	

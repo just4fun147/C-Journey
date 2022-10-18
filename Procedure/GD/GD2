@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-B-200710755//
+
+void prosedurTukarIsiEfekNetto(int *var1, int *var2);
+
+
+int main() {
+	int a=2, b=5, c=7, d=18;
+	
+	printf("Hasil Sebelum ditukar (a - b): %d - %d\n",a,b);
+	prosedurTukarIsiEfekNetto(&a,&b);
+	printf("Hasil Sebelum ditukar (a - b): %d - %d\n",a,b);
+	
+	printf("Hasil Sebelum ditukar (c - d): %d - %d\n",c,d);
+	prosedurTukarIsiEfekNetto(&c,&d);
+	printf("Hasil Sebelum ditukar (c - d): %d - %d\n",c,d);
+	
+	printf("Hasil Sebelum ditukar (a - c): %d - %d\n",a,c);
+	prosedurTukarIsiEfekNetto(&a,&c);
+	printf("Hasil Sebelum ditukar (a - c): %d - %d\n",a,c);
+	
+	printf("Hasil Sebelum ditukar (a - d): %d - %d\n",a,d);
+	prosedurTukarIsiEfekNetto(&a,&d);
+	printf("Hasil Sebelum ditukar (a - d): %d - %d\n",a,d);
+	
+}
+
+void prosedurTukarIsiEfekNetto(int *var1,int *var2){
+	int c;
+	
+	c=*var2;
+	*var2=*var1;
+	*var1=c;
+}

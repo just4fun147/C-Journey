@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-B-200710755//
+typedef char string [100];
+
+void menu(int *pil,string user);
+
+void login(string user,string pass,string password);
+void profil(string perusahaan,string jenis,float *utang,float *aset,float *modal);
+void penjualan(float*a,float *b,float *jual,int bul1,int bul2,int bul, float *jum);
+void tampil(string perusahaan,string jenis,float *utang, float*aset,float *jum,float *modal);
+void ganti(string user, string pass,string password);
+
+
+int main () {
+	int pil,bul,bul1,bul2,log;
+	string user,pass,perusahaan,jenis,password;
+	float utang, aset,a,b,jual,jum,modal;
+
+	masuk:
+	system("cls");
+	login(user,pass,password);
+	awal:
+	system("cls");
+	menu(&pil,user);
+	switch(pil){
+		case 1:
+			void profil(perusahaan,jenis,&utang,&aset,&modal);
+			getche();
+			goto awal;
+		case 2:
+			penjualan(&a,&b,&jual,&bul1,&bul2,&bul,&jum);
+			getche();
+			goto awal;
+		case 3:
+			tampil(perusahaan,jenis,&utang,&aset,&jum,&modal);
+			getche();
+			goto awal;
+		case 4:
+			ganti(user,pass,password);
+			getche();
+			goto awal;
+		case 0:
+			log=0;
+			goto masuk;
+			
+	}
+
+	
+	return 0;
+}
+
+
+void login(string user,string pass,string password){
+	int log;
+
+	log=0;
+	while(log<2){
+		printf("Username: ");fflush(stdin);gets(user);
+		printf("\nPassword: ");fflush(stdin);gets(pass);
+		strcpy(password,password);
+		if(strcmp(user,"admin")==0){
+		log++;}
+		if(strcmp(user,"andre")==0){
+		log++;}
+		if(strcmp(pass,"admin")==0){
+		log++;}
+		if(strcmp(pass,"200710755")==0){
+		log++;}
+		if(strcmp(pass, password)==0){
+		log++;}
+		if(log<3){
+		printf("\nUsername / Password salah\n");
+		}
+		}
+}	
+	
+	
+	
+	
+
+void menu(int *pil, string user){
+	
+	printf("User yang sedang login: %s\n",user);
+	printf("1. Input Profil Perusahaan\n");
+	printf("2. Input Penjualan\n");
+	printf("3. Tampil Perusahaan\n");
+	printf("4. Ganti Password\n");
+	printf("0 Exit\n");
+	printf("Pil >> ");scanf("%d", &*pil);
+
+	
+
+	
+}
+
+void profil(string perusahaan,string jenis,float *utang,float *aset,float *modal){
+	printf("Nama Perusahaan: ");fflush(stdin);gets(perusahaan);
+	printf("Jenis Perusahaan: ");fflush(stdin);gets(jenis);
+	printf("Utang Perusahaan: ");scanf("%f", &*utang);
+	printf("Jumlah Aset Perusahaan: ");scanf("%f", &*aset);
+	printf("Input Profil Perusahaan Berhasil!");
+	*modal=utang-aset;
+}
+
+void penjualan(float*a,float *b,float *jual,int bul1,int bul2,int bul, float *jum){
+	jum=0;
+	for(bul=3;bul<12;bul++){
+		printf("Masukan data Penjualan untuk bulan -%d:",bul);scanf("%f", &jual);
+		
+		if(jual>a){
+			a=jual;
+	  		bul1=bul;	
+		}
+		if(a>b){
+			b=a;
+			bul2=bul;
+		}
+
+		}
+
+ printf("Penjualan Terbesar ada di bulan %d dan %d dengan pendapatan sebanyak %.2f dan %.2f", bul1,bul2,a,b);
+}
+
+void tampil(string perusahaan,string jenis,float *utang, float *aset,float *jum,float *modal){
+
+	printf("Informasi Perusahaan");
+	printf("\nNama Perusahaan : %s",perusahaan);
+	printf("\nJenis Perusahaan: %s", jenis);
+	printf("\nUtang Perusahaan: %.2f", *utang);
+	printf("\nJumlah Psset Perusahaan Perusahaan: %.2f", *aset);
+	printf("\nModal Perusahaan: %f",*modal);
+	printf("\nTotal Penjualan Perusahaan: %f",*jum);
+}
+
+void ganti(string user,string pass,string password){
+	ulang:
+	printf("Masukan Username: ");fflush(stdin);gets(user);
+	printf("Masukan Password: ");fflush(stdin);gets(pass);
+	if(strcmp(pass,"admin")==0){
+	printf("Masukan Password Baru: ");fflush(stdin);gets(password);
+	printf("Password Berhasil Diubah");}
+	else if(strcmp(pass,"200710755")==0){
+	printf("Masukan Password Baru: ");fflush(stdin);gets(password);
+	printf("Password Berhasil Diubah");}
+	else if(strcmp(pass,password)==0){
+	printf("Masukan Password Baru: ");fflush(stdin);gets(password);
+	printf("Password Berhasil Diubah");
+	} else{
+		printf("Password Salah");
+		getche();
+		goto ulang;
+	}strcpy(password,password);
+}
+
