@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int i,j,nilai;
+	printf("Masukan Nilai: ");scanf("%d", &nilai);
+	for(i=1;i<=nilai;i++){
+	for(j=nilai;j>=1;j--){
+		if(i==j)
+		printf("*");
+		else 
+		printf("%d",j);
+	}
+	printf("\n");
+}
+	return 0;
+}

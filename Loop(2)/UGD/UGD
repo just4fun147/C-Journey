@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef char string [100];
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int i,input,menu,out,j,bonus,coun;
+	char A;
+	menu:
+	system("cls");
+	printf("--==Percetakan Atma==--");
+	printf("\n[1] Input Data");
+	printf("\n[2] Cetak");
+	printf("\n[3] Tugas");
+	printf("\n[0] Keluar");
+	printf("\n==> ");scanf("%d", &menu);
+	switch(menu){
+		case 1:
+			for(i=0;i<1;i++){
+	
+				printf("Cetak perkalian dari 1 : ");scanf("%d", &input);
+				if(input<1){
+				printf("Maaf input tidak boleh kurang dari 1");
+				coun++;
+				getche();
+				}
+			}
+			goto menu;
+		case 2:
+			printf("Perkalian dari 1 sampai %d", input);
+			bonus=input;
+			if(input>=6){
+				printf("\n");
+				for(i=1; i<=10; i++){
+				for(j=1; j<=input;j++){
+					out=i*j;
+					printf("%dx%d = %d",j ,i, out);
+					printf(", ");
+				}printf("\n");
+				}
+		//bonus		
+				printf("\nMendapatkan Bonus\n");
+				bonus=input+1;
+				for(i=1;i<=input;i++){
+					for(j=1;j<=input;j++){
+						if(i==input || j==input){
+							printf("*");
+						}else if(i+j==bonus){
+							printf("*");
+						}else{
+							printf(" ");
+						}
+					}printf("\n");
+				}
+			}else{
+				printf("\n");
+				for(i=1; i<=10; i++){
+				for(j=1; j<=input;j++){
+					out=i*j;
+					printf("%dx%d = %d",j ,i, out);
+					printf(", ");
+				}printf("\n");
+			}
+			}getche();
+			goto menu;
+		case 3 :
+			A='A';
+			for(i=1;i<=input; i++){
+			for(j=1; j<=i;j++){
+				printf("%c",A);
+				A++;
+				}printf("\n");
+			}
+			getche();
+			goto menu;
+		default:
+			getche();
+			goto menu;			
+	}
+	
+	
+	return 0;
+}
