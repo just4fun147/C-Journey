@@ -1,0 +1,309 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//Paulus Pandu Windito-B-200710755//
+typedef char string [100];
+
+
+typedef struct{
+	string klub;
+	int tahunMulai,tahunSelesai;
+}Karir_0755;
+
+typedef struct{
+	string nama,posisi;
+	int umur;
+	Karir_0755 kar[1];	
+}Pemain_0755;
+
+typedef struct{
+	Pemain_0755 pemain[5];
+	
+}Tim_0755;
+
+void init(Tim_0755 tim[],int *cek){
+	int i;
+	for(i=0;i<6;i++){
+		strcpy(tim[0].pemain[i].kar[0].klub,"");
+		strcpy(tim[1].pemain[i].kar[0].klub,"");
+		strcpy(tim[0].pemain[i].kar[1].klub,"");
+		strcpy(tim[1].pemain[i].kar[1].klub,"");
+		tim[0].pemain[i].kar[0].tahunMulai=0;
+		tim[1].pemain[i].kar[0].tahunMulai=0;
+		tim[0].pemain[i].kar[1].tahunMulai=0;
+		tim[1].pemain[i].kar[1].tahunMulai=0;
+		tim[0].pemain[i].kar[0].tahunSelesai=0;
+		tim[1].pemain[i].kar[0].tahunSelesai=0;
+		tim[0].pemain[i].kar[1].tahunSelesai=0;
+		tim[1].pemain[i].kar[1].tahunSelesai=0;
+		strcpy(tim[0].pemain[i].nama,"KOSONG");
+		strcpy(tim[1].pemain[i].nama,"KOSONG");
+		strcpy(tim[0].pemain[i].posisi,"");
+		strcpy(tim[1].pemain[i].posisi,"");
+		tim[0].pemain[i].umur=0;
+		tim[1].pemain[i].umur=0;
+	}
+	strcpy(tim[1].pemain[1].nama,"KOSONG");
+
+	*cek=0;
+}
+void show(Tim_0755 tim[]){
+	printf("Tim 1: [ %s ][ %s ][ %s ][ %s ][ %s ]",tim[0].pemain[1].nama,tim[0].pemain[2].nama,tim[0].pemain[3].nama,tim[0].pemain[4].nama,tim[0].pemain[5].nama);
+	printf("\nTim 2: [ %s ][ %s ][ %s ][ %s ][ %s ]",tim[1].pemain[1].nama,tim[1].pemain[2].nama,tim[1].pemain[3].nama,tim[1].pemain[4].nama,tim[1].pemain[5].nama);
+}
+void showTertentu(Tim_0755 tim[],int i,int j){
+	printf("\nNama Pemain :%s",tim[j].pemain[i].nama);
+	printf("\nPosisi Pemain :%s",tim[j].pemain[i-1].posisi);
+	printf("\nUmur Pemain : %d",tim[j].pemain[i-1].umur);
+	printf("\n\tKlub Pemain - 1 : %s",tim[j].pemain[i-1].kar[0].klub);
+	printf("\n\tTahun Mulai - 1 : %d",tim[j].pemain[i-1].kar[0].tahunMulai);
+	printf("\n\tTahun Selesai -1 :%d",tim[j].pemain[i-1].kar[0].tahunSelesai);
+	printf("\n\n\tKlub Pemain - 2 :%s",tim[j].pemain[i-1].kar[1].klub);
+	printf("\n\tTahun Mulai - 2 :%d",tim[j].pemain[i-1].kar[1].tahunMulai);
+	printf("\n\tTahun Selesai -2 :%d",tim[j].pemain[i-1].kar[1].tahunSelesai);
+}
+void tambahPemain();
+void keluarPemain();
+int tambah;
+
+int main(int argc, char *argv[]) {
+	Pemain_0755 pemain[5];
+	int menu,cek=0,menu2,t,tambah,i=0,j=0,k,l,tim2,tim1;
+	Tim_0755 tim[3];
+	string temp,temps,seme;
+
+	menu:
+	system("cls");
+	printf("[1] Init Data ");
+	printf("\n[2] Tampil");
+	printf("\n[3] Tambah Pemain");
+	printf("\n[4] Keluarkan Pemain");
+	printf("\n[5] Swap Pemain(Bonus)");
+	printf("\n[6] Edit Pemain(Bonus)");
+	printf("\n[0] Keluar");
+	printf("\nMasukan Pilihan[1-6]");scanf("%d", &menu);
+		switch(menu){
+			case 1:
+				if(cek==0){
+					init(tim,&cek);
+					cek++;
+					printf("[*] Berhasil init data");
+					getch();
+					goto menu;
+				}else if(cek>0){
+					init(tim,&cek);
+					cek++;
+					printf("[*] Menginit data kembali");
+					getch();
+					goto menu;
+				}
+				
+			case 2:
+				if(cek==0){
+					printf("[!] Harus init terlebih dahulu");
+					getch();
+					goto menu;
+				}
+				printf("\n[1] Tampil Tim");
+				printf("\n[2] Tampil Pemain Tertentu");
+				printf("\n\nMasukan Pilihan[1-2] :");scanf("%d", &menu2);
+				switch(menu2){
+					case 1:
+						show(tim);
+						getch();
+						goto menu;
+					case 2:
+						do{
+							printf("Masukan Nama Pemain :");fflush(stdin);gets(temp);
+							if(strcmp(temp,"")==0||strlen(temp)<=0){	
+							printf("\n[!] Nama Pemain tidak boleh kosong!\n");
+							}else if(strcmp(temp,tim[0].pemain[0].nama)!=0&&strcmp(temp,tim[0].pemain[1].nama)!=0&&strcmp(temp,tim[0].pemain[2].nama)!=0&&strcmp(temp,tim[0].pemain[3].nama)!=0&&strcmp(temp,tim[0].pemain[4].nama)!=0&&strcmp(temp,tim[0].pemain[5].nama)!=0&&strcmp(temp,tim[1].pemain[0].nama)!=0&&strcmp(temp,tim[1].pemain[1].nama)!=0&&strcmp(temp,tim[1].pemain[2].nama)!=0&&strcmp(temp,tim[1].pemain[3].nama)!=0&&strcmp(temp,tim[1].pemain[4].nama)!=0){
+								printf("\n[!] Nama Pemain tidak ditemukan\n");
+								getch();
+								goto menu;
+							}
+						}while(strcmp(temp,"")==0||strlen(temp)<=0);
+						for(j=0;j<2;j++){
+							for(i=0;i<5;i++){
+									if(strcmp(temp,tim[j].pemain[i].nama)==0){
+										showTertentu(tim,i,j);
+
+									}
+								}
+							}
+							getch();
+							goto menu;			
+				}
+				
+			case 3:
+				if(cek==0){
+					printf("[!] Harus init terlebih dahulu");
+					getch();
+					goto menu;
+				}	
+				if(j==5&&i==0){
+					tim1=1;
+				}
+				if(j==4&&i==1){
+					tim2=1;
+				}
+				if(j==5&&i==1){
+					printf("\n[!] Tim Pemain sudah penuh");
+					getch();
+					goto menu;
+				}
+				if(j==5){
+					j=0;
+					i=1;
+				}
+					do{
+							printf("Masukan Nama Pemain :");fflush(stdin);gets(temp);
+							if(strcmp(temp,"")==0||strlen(temp)<=0){	
+							printf("\n[!] Nama Pemain tidak boleh kosong!\n");
+							}else if(strcmp(temp,tim[0].pemain[0].nama)==0||strcmp(temp,tim[0].pemain[1].nama)==0||strcmp(temp,tim[0].pemain[2].nama)==0||strcmp(temp,tim[0].pemain[3].nama)==0||strcmp(temp,tim[0].pemain[4].nama)==0||strcmp(temp,tim[0].pemain[5].nama)==0||strcmp(temp,tim[1].pemain[0].nama)==0||strcmp(temp,tim[1].pemain[1].nama)==0||strcmp(temp,tim[1].pemain[2].nama)==0||strcmp(temp,tim[1].pemain[3].nama)==0||strcmp(temp,tim[1].pemain[4].nama)==0){
+								printf("\n[!] Nama Pemain tidak boleh sama\n");
+							}
+						}while(strcmp(temp,"")==0||strlen(temp)<=0&&strcmp(temp,tim[0].pemain[0].nama)==0&&strcmp(temp,tim[0].pemain[1].nama)==0&&strcmp(temp,tim[0].pemain[2].nama)==0&&strcmp(temp,tim[0].pemain[3].nama)==0&&strcmp(temp,tim[0].pemain[4].nama)==0&&strcmp(temp,tim[1].pemain[0].nama)==0&&strcmp(temp,tim[1].pemain[1].nama)==0&&strcmp(temp,tim[1].pemain[2].nama)==0&&strcmp(temp,tim[1].pemain[3].nama)==0&&strcmp(temp,tim[1].pemain[4].nama)==0);
+						
+						strcpy(temp,tim[i].pemain[j].nama);
+						printf("Masukan Posisi Pemain : ");fflush(stdin);gets(tim[i].pemain[j].posisi);
+						printf("Masukan Umur Pemain : ");scanf("%d", &tim[i].pemain[j].umur);
+						for(k=0;k<2;k++){
+							printf("\n\tMasukan klub -%d :",k+1);fflush(stdin);gets(tim[i].pemain[j].kar[k].klub);
+							printf("\tMasukan Tahun Mulai -%d : ",k+1);scanf("%d", &tim[i].pemain[j].kar[k].tahunMulai);
+							printf("\tMasukan Tahun Selesai -%d : ",k+1);scanf("%d", &tim[i].pemain[j].kar[k].tahunSelesai);
+						}
+							j++;
+					
+						printf("[*] Berhasil Menambahkan Pemain");
+						getch();
+						goto menu;
+						
+			case 4:
+				if(cek==0){
+					printf("[!] Harus init terlebih dahulu");
+					getch();
+					goto menu;
+				}
+				do{
+							printf("Masukan Nama Pemain : ");fflush(stdin);gets(temp);
+							if(strcmp(temp,"")==0||strlen(temp)<=0){	
+							printf("\n[!] Nama Pemain tidak boleh kosong!\n");
+							}
+						}while(strcmp(temp,"")==0||strlen(temp)<=0);
+						
+				printf("Ingin mengeluarkan Pemain(y/t) ? :");fflush(stdin);gets(temps);
+					if(strcmpi(temps,"y")==0){
+						for(j=0;j<2;j++){
+						for(i=0;i<5;i++){
+							if(strcmpi(temp,tim[j].pemain[i].nama)==0){
+								if(j==0){
+									if(tim1!=1){
+										printf("[!] Gagal mengeluarkan pemain, Tim 1 belum penuh");
+										getch();
+										goto menu;
+									}
+								}else if(j==1){
+									if(tim2!=1){
+										printf("[!] Gagal mengeluarkan pemain, Tim 2 belum penuh");
+										getch();
+										goto menu;
+									}
+								}
+								strcpy(tim[j].pemain[i-1].kar[0].klub,"");
+								strcpy(tim[j].pemain[i-1].kar[1].klub,"");
+								tim[j].pemain[i-1].kar[0].tahunMulai=0;
+								tim[j].pemain[i-1].kar[1].tahunMulai=0;
+								tim[j].pemain[i-1].kar[0].tahunSelesai=0;
+								tim[j].pemain[i-1].kar[1].tahunSelesai=0;
+								strcpy(tim[j].pemain[i-1].nama,"KOSONG");
+								strcpy(tim[j].pemain[i-1].posisi,"");
+								tim[j].pemain[i-1].umur=0;
+
+							}else{
+								printf("[!] Nama Pemain tidak ditemukan !");
+								getch();
+								goto menu;
+								}
+							}
+						}
+						
+					}
+						
+					
+					getch();
+					goto menu;
+				
+			case 5:
+				if(cek==0){
+					printf("[!] Harus init terlebih dahulu");
+					getch();
+					goto menu;
+				}
+				printf("\nMasukan Nama Pemain 1 : ");fflush(stdin);gets(temp);
+				printf("\nMasukan Nama Pemain 2 : ");fflush(stdin);gets(temps);
+				for(j=0;j<2;j++){	
+					for(i=1;i<6;i++){
+						for(k=0;k<2;k++){
+							for(l=1;l<6;l++){															
+								if(strcmp(temp,tim[j].pemain[i].nama)==0&&strcmp(temps,tim[k].pemain[l].nama)==0){
+										strcpy(tim[k].pemain[l].nama,temp);
+										strcpy(tim[j].pemain[i].nama,temps);
+										getch();
+										goto menu;	
+									
+								}
+										
+								}
+							}
+						}
+					
+					}
+				printf("Nama Pemain Tidak Ditemukan!");
+					getch();
+					goto menu;
+			case 6:
+				if(cek==0){
+					printf("[!] Harus init terlebih dahulu");
+					getch();
+					goto menu;
+				}
+				printf("Masukan Nama Pemain : ");fflush(stdin);gets(temp);
+				for(j=0;j<2;j++){
+						for(i=0;i<5;i++){
+							if(strcmp(temp,tim[j].pemain[i].nama)==0){
+								showTertentu(tim,i,j);
+								printf("\nData Baru");
+									do{
+									printf("\nMasukan Nama Pemain :");fflush(stdin);gets(temp);
+									if(strcmp(temp,"")==0||strlen(temp)<=0){	
+									printf("\n[!] Nama Pemain tidak boleh kosong!\n");
+									}else if(strcmp(temp,tim[0].pemain[0].nama)==0||strcmp(temp,tim[0].pemain[1].nama)==0||strcmp(temp,tim[0].pemain[2].nama)==0||strcmp(temp,tim[0].pemain[3].nama)==0||strcmp(temp,tim[0].pemain[4].nama)==0||strcmp(temp,tim[0].pemain[5].nama)==0||strcmp(temp,tim[1].pemain[0].nama)==0||strcmp(temp,tim[1].pemain[1].nama)==0||strcmp(temp,tim[1].pemain[2].nama)==0||strcmp(temp,tim[1].pemain[3].nama)==0||strcmp(temp,tim[1].pemain[4].nama)==0){
+										printf("\n[!] Nama Pemain tidak boleh sama\n");
+									}
+								}while(strcmp(temp,"")==0||strlen(temp)<=0&&strcmp(temp,tim[0].pemain[0].nama)==0&&strcmp(temp,tim[0].pemain[1].nama)==0&&strcmp(temp,tim[0].pemain[2].nama)==0&&strcmp(temp,tim[0].pemain[3].nama)==0&&strcmp(temp,tim[0].pemain[4].nama)==0&&strcmp(temp,tim[1].pemain[0].nama)==0&&strcmp(temp,tim[1].pemain[1].nama)==0&&strcmp(temp,tim[1].pemain[2].nama)==0&&strcmp(temp,tim[1].pemain[3].nama)==0&&strcmp(temp,tim[1].pemain[4].nama)==0);
+									
+									strcpy(tim[j].pemain[i].nama,temp);
+									printf("Masukan Posisi Pemain : ");fflush(stdin);gets(tim[i].pemain[j].posisi);
+									printf("Masukan Umur Pemain : ");scanf("%d", &tim[i].pemain[j].umur);
+									for(k=0;k<2;k++){
+									printf("\n\tMasukan klub -%d :",k+1);fflush(stdin);gets(tim[i].pemain[j].kar[k].klub);
+									printf("\tMasukan Tahun Mulai -%d : ",k+1);scanf("%d", &tim[i].pemain[j].kar[k].tahunMulai);
+									printf("\tMasukan Tahun Selesai -%d : ",k+1);scanf("%d", &tim[i].pemain[j].kar[k].tahunSelesai);
+									getch();
+									goto menu;
+								}	
+							}															
+						}
+				}
+				printf("[!] Nama Pemain tidak ditemukan !");
+				getch();
+				goto menu;
+			case 0:
+				printf("\t Paulus Pandu Windito-200710755");
+				getch();
+				return 0;
+			
+		}
+	return 0;
+	}
