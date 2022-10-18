@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef char string [30];
+
+/* Paulus Pandu Windito / 200710755 / B */
+
+
+int main(int argc, char *argv[]) {
+	
+	// GD PEMILIHAN IF-ELSE
+	string nama, npm;
+	int umur;
+	
+	printf("\n\t-- GD IF ELSE--");
+	printf("\nMasukan nama : "); fflush(stdin);gets(nama);
+	printf("\nMasukan npm (4 digit terakhir):");fflush(stdin);gets(npm);
+	printf("\nMasukan Umur : ");scanf("%d",&umur);
+	
+	if(strlen(nama) > 0 && strlen(npm) == 4 && umur > 0){
+		printf("\nNama : %s",nama);
+		printf("\nNPM : %s",npm);
+		printf("\nUmur : %d",umur);
+	}else{
+		printf("\nData Masih kurang lengkap / tidak tepat");
+	}
+
+	
+	return 0;
+}

@@ -1,0 +1,171 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef char string [100];
+typedef char na[100];
+/* Paulus Pandu Windito / 200710755/ B */
+
+int main(int argc, char *argv[]) {
+	
+	int pil, a=0, log=0, nomormeja, jumlahmakanan,n1,n2,n3,n4,a1,a2,a3,a4;
+	char menu,aa;
+	float hargamakanan, bayar, kembalian, hartot,ha,kembali;
+	string  na, pass, user, kodemakanan, namamakanan,opsi;
+	
+	log=0;
+
+	do{
+	
+	system("cls");
+	printf("\n\t==-- Burjo Siliwangi--==");
+	printf("\n[1]. Login");
+	printf("\n[2]. Daftar Menu");
+	printf("\n[3]. Pesan Makanan");
+	printf("\n[4]. Pembayaran");
+	printf("\n[0]. Keluar");
+	printf("\nMasukan Pilihan :"); scanf("%d", &pil);
+	switch (log){
+		case 0 :
+			switch(pil){
+				case 0:
+					return 0;
+					break;
+					
+				case 1:
+					printf("-- Silahkan Login--");
+					printf("\nMasukan Username : ");fflush(stdin);gets(user);
+					printf("\nMasukan Password : ");fflush(stdin);gets(pass);
+				
+					if(strcmp(user,"Pandu")==0 && strcmp(pass,"0755")==0){
+						printf("Login Berhasil");
+						log=1;
+					
+					}else {
+					printf("Username atau Password Salah");
+					break;
+				
+				case 2:
+					printf("Anda belum login");
+					break;
+					
+				case 3:
+					printf("Anda belum login");
+					break;
+				case 4:
+					printf("Anda belum login");
+					break;
+			}break;
+		}break;
+			
+		case 1:
+				switch(pil){
+			case 1 :
+				printf("Anda sudah login ");
+				break;
+					
+			case 2 :
+					n1=21-a1;
+					n2=14-a2;
+					n3=16-a3;
+					n4=5-a4;
+				printf("--Daftar Menu--");
+				printf("\n[1]. Nasi Orak-Arik Telor");
+				printf("\n\t\tKode Makanan: OAT");
+				printf("\n\t\tHarga per porsi: Rp. 7000");
+				printf("\n\t\tPorsi Makanan: Sedang");
+				printf("\n\t\tStok Makanan :%d",n1);
+				
+				printf("\n[2]. Magelangan Ayam");
+				printf("\n\t\tKode Makanan: MAM");
+				printf("\n\t\tHarga per porsi: Rp. 9500");
+				printf("\n\t\tPorsi Makanan: Besar");
+				printf("\n\t\tStok Makanan :%d",n2);
+				
+				printf("\n[3]. Indomie Siliwangi");
+				printf("\n\t\tKode Makanan: ISG");
+				printf("\n\t\tHarga per porsi: Rp. 6000");
+				printf("\n\t\tPorsi Makanan: Kecil");
+				printf("\n\t\tStok Makanan :%d",n3);
+				
+				printf("\n[4]. Chicken Steak Siliwangi");
+				printf("\n\t\tKode Makanan: CS71");
+				printf("\n\t\tHarga per porsi: Rp. 14000");
+				printf("\n\t\tPorsi Makanan: Sedang");
+				printf("\n\t\tStok Makanan :%d",n4);
+				break;
+				
+			case 3:
+				printf("-- Pesan Makanan--");
+				printf("\nMasukan Nomor Meja : ");scanf("%d", &nomormeja);
+				printf("\nMasukan Kode Makanan : ");fflush(stdin);gets(kodemakanan);
+				printf("\nMasukan Jumlah Makanan Yang Dipesan : ");scanf("%d", &jumlahmakanan);
+				
+				if(strcmp(kodemakanan,"OAT")==0){
+						strcpy(na,"Nasi Orak-Arik Telur") ;
+						ha=7000;
+						a1=jumlahmakanan+1;
+					}else if(strcmp(kodemakanan,"MAM")==0){
+						strcpy(na,"Magelangan Ayam") ;
+						ha= 9500;
+						a2=jumlahmakanan;
+					}else if(strcmp(kodemakanan,"ISG")==0){
+						strcpy(na,"Indomie Siliwangi") ;
+						ha= 6000;	
+						a3=jumlahmakanan;					
+					}else if(strcmp(kodemakanan,"CS71")==0){
+						strcpy(na,"Chicken Steal Siliwangi") ;
+						ha= 14000;	
+						a4=jumlahmakanan;
+					}else {
+					printf("Kode Makanan Tidak Ditemukan");
+					}
+					
+					
+				//nota//
+				printf("- NOTA -");
+				printf("\nNomor Meja : %d", nomormeja);
+				printf("\nKode Makanan : %s", kodemakanan);
+				printf("\nNama Makanan : %s",na);
+				printf("\nHarga Makanan : Rp %.2f", ha );
+				printf("\nJumlah Pesanan : %d", jumlahmakanan);
+				printf("\n--------------------------");
+					float hartot;
+					hartot= ha*jumlahmakanan;
+				printf("\nHarga Total : Rp %.2f", hartot);
+				
+				printf("\nApakah anda ingin memesan makanan ini [ya/tidak?]");fflush(stdin);gets(opsi);
+					if(strcmp(opsi,"ya")==0){
+						printf("Pesanan berhasil dipesan");
+					}else{
+						printf("Pesanan dibatalkan");
+					}break;
+			case 4:	
+				printf("-- Pembayaran --");
+				printf("\nHarga Total: Rp %.2f", hartot);
+				printf("\nMasukan uang anda: ");scanf("%f.2", &bayar);
+					kembali=bayar-hartot;
+				if(bayar<hartot){
+					printf("Uang anda kurang!!!");
+				}else {
+					printf("Kembalian anda: Rp. %.2f", kembali);
+					printf("\nTerima kasih, mampir lagi ya");
+				}
+				break;
+			case 0:
+				printf("Terima Kasih :D");
+				log=0;
+			default : 
+			printf("Tidak ada menu...");
+			break;
+			
+		} 
+
+}getch();
+}while(pil!=0);
+return 0;
+	}
+	
+		
+	
+		

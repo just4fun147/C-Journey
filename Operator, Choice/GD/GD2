@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* Paulus Pandu Windito / 200710755/ B */
+
+int main(int argc, char *argv[]) {
+	
+	//GD SWITCH
+	int pil, a=0;
+	char menu,temp;
+	float harga;
+	
+	do{
+	
+		system("cls");
+		printf("\n\t--== GD SWITCH ==--");
+		printf("\n\t-- Daftar Menu --");
+		printf("\n[1], Daftar Menu");
+		printf("\n[2], Tampil");
+		printf("\n[0], Keluar");
+		printf("\nMasukan Pilihan : ");scanf("%d", &pil);
+	
+		switch(pil){
+			case 1:
+				printf("\n\t-- Daftar Menu--");
+				printf("\n\t[a], Nasi Goreng");
+				printf("\n\t[b], Mie Goreng");
+				printf("\n\t[c], Nasi Telor");
+				printf("\n\tMasukan Pesanan Anda:"); scanf("%c",&menu);
+				menu=getch();
+				
+				switch(menu){
+					case 'a':
+						harga = 12000;
+						a=1;
+						printf("\n\tBerhasil input pesanan");
+						temp='a';
+						break;
+					case 'b':
+						harga = 6000;
+						a=1;
+						printf("\n\tBerhasil input pesanan");
+						temp='b';
+						break;	
+					
+					case 'c':
+						harga = 10000;
+						a=1;
+						printf("\n\tBerhasil input pesanan");
+						temp='c';
+						break;
+				}
+				break;
+			case 2:
+				if(a==0){
+					printf("\nSilahkan Input Pesanan terlebih dahulu");
+				}else{
+					printf("\n\t-- Menu Tampil--");
+					if(temp=='a'){
+					printf("\nMenu yang dipesan : Nasi Goreng");
+					printf("\nHarga : %.2f",harga);
+					}else if(temp=='b'){
+					printf("\nMenu yang dipesan : Mie Goreng");
+					printf("\nHarga : %.2f",harga);
+					}else{
+					printf("\nMenu yang dipesan : Nasi Telor");
+					printf("\nHarga : %.2f",harga);
+					}
+				}
+				break;
+				
+			default:
+				printf("\nTidak ada Menu...");
+				break;
+				
+			case 0:
+				printf("\nBerhasil Keluar");
+				break;
+			}
+			getch();
+		}while(pil!=0);
+		
+	return 0;
+}
