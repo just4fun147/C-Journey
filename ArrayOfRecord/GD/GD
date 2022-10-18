@@ -1,0 +1,198 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//Paulus Pandu Windito-B-200710755//
+
+typedef char string [100];
+
+typedef struct{
+	string nama;
+	int umur;
+}AnakAyam;
+
+typedef struct{
+	string nama, jenis;
+	int umur;
+	AnakAyam anak_ayam[2];
+}Ayam;
+
+void init(Ayam ayam[]);
+int cek(Ayam ayam[],string nama);
+int full(Ayam ayam[]);
+void show(Ayam ayam[]);
+void tampil(Ayam ayam[],string nama);
+void plus(Ayam ayam[]);
+
+
+int main(int argc, char *argv[]) {
+	Ayam ayam[5];
+	string nama;
+	int session=0,menu,menu2,i;
+	
+	do{
+		system("cls");
+		printf("GUIDED AOR");
+		printf("\n\n[1] Init Data");
+		printf("\n[2] Tampil");
+		printf("\n[3] Tambah Ayam");
+		printf("\n[0] Keluar");
+		printf("\n>>>");scanf("%d", &menu);
+		
+		switch(menu){
+			case 1:
+				init(ayam);
+				printf("\nBerhasil Init Data");
+				session=1;
+				break;
+			case 2:
+				if(session==1){
+					printf("\n[1] Tampil Kandang Ayam");
+					printf("\n[2] Tampil Data Tertentu");
+					printf("\n>>>");scanf("%d", &menu2);
+					
+					switch(menu2){
+						case 1:
+							show(ayam);
+							break;
+						case 2:
+							printf("Masukan Nama Ayam:");fflush(stdin);gets(nama);
+							if(cek(ayam,nama)!=1){
+								tampil(ayam,nama);
+							}else{
+								printf("\nNama Ayam tidak ditemukan !");
+							}
+							break;
+						default:
+							printf("\n\tMenu tidak tersedia!\n\n");
+							break;
+							
+					}
+				}else{
+					printf("\nInit Data Dulu !");
+				}
+				break;
+			
+			case 3:
+				if(session==1){
+					if(full(ayam)!=1){
+						plus(ayam);
+					}else{
+						puts("\n[!] Kandang sudah penuh");
+					}
+				}else{
+					printf("\nInit Data Dulu");
+				}
+				break;
+				
+			case 0:
+				printf("Keluar Program");
+				break;
+				
+			default:
+				printf("Menu tidak tersedia!");
+				break;
+		}
+		getch();
+	}while(menu!=0);
+	
+	return 0;
+}
+
+void init(Ayam ayam[]){
+	int i,j;
+	for(i-0;i<5;i++){
+		strcpy(ayam[i].nama,"-");
+		strcpy(ayam[i].jenis,"-");
+		ayam[i].umur=0;
+		
+		for(j=0;j<2;j++){
+			strcpy(ayam[i].anak_ayam[j].nama,"-");
+			ayam[i].anak_ayam[j].umur=0;
+		}
+	}
+}
+
+
+int cek(Ayam ayam[],string nama){
+	int i;
+	for(i-0;i<5;i++){
+		if(strcmp(ayam[i].nama,nama)==0){
+			return i;
+			break;
+		}
+	}
+	return -1;
+}
+
+
+int full(Ayam ayam[]){
+	int i;
+	for(i=0;i<5;i++){
+		if(strcmp(ayam[i].nama,"-")==0){
+			return i;
+			break;
+		}
+	}
+	return -1;
+}
+
+
+void show(Ayam ayam[]){
+	int i;
+	printf("\nKandang	:");
+	for(i=0;i<5;i++){
+		if(strcmp(ayam[i].nama,"-")==0){
+			printf("[KOSONG]");
+		}else{
+			printf("[%s]",ayam[i].nama);
+		}
+	}
+	printf("\n");
+}
+void tampil(Ayam ayam[],string nama){
+	int i,j;
+	for(i-0;i<5;i++){
+		if(strcmp(ayam[i].nama,nama)==0){
+			printf("\nNama Ayam	:%s",ayam[i].nama);
+			printf("\nJenis Ayam	:%s",ayam[i].jenis);
+			printf("\nUmur Ayam	:%d",ayam[i].umur);
+			
+			for(j=0;j<2;j++){
+				printf("\n\nNama Anak Ayam	:%s",ayam[i].anak_ayam[j].nama);
+				printf("\n\nUmur Anak Ayam	:%d",ayam[i].anak_ayam[j].umur);
+			}
+			return;
+		}
+	}
+}
+void plus(Ayam ayam[]){
+	Ayam temp;
+	AnakAyam temps;
+	int i,j;
+	
+	do{
+		printf("\nNama Ayam	:");fflush(stdin);gets(temp.nama);
+		if(cek(ayam,temp.nama)!=-1){
+			printf("\nNama Ayam tidak boleh sama!");
+		}
+	}while(cek(ayam,temp.nama)!=-1);
+	
+	printf("Jenis Ayam	: ");fflush(stdin);gets(temp.jenis);
+	printf("Umur Ayam	: ");scanf("%d", &temp.umur);
+	
+	for(j=0;j<2;j++){
+		printf("\n\tNama Anak Ayam	: ");fflush(stdin);gets(temps.nama);
+		printf("\tUmur Anak Ayam	: ");scanf("%d", &temps.umur);
+		
+		temp.anak_ayam[j]=temps;
+	}
+	
+	for(i=0;i<5;i++){
+		if(strcmp(ayam[i].nama,"-")==0){
+			ayam[i]=temp;
+			printf("\n[*] Berhasil Menambah Ayam");
+			return;
+		}
+	}
+}
+
