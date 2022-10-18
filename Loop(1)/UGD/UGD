@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef char string [100];
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int p,p1,p2,log, menu,x,y,z;
+	float bayar1,bayar,bayar2,bayar3,bayar4,tot;
+	string nama, nama1,nama2,nama3, email,email2,email3, email1, user, pass;
+	printf("====Menu Login====");
+	
+	log=0;
+	while(log<2){
+		printf("\nUsername: ");fflush(stdin);gets(user);
+		printf("\nPassword: ");fflush(stdin);gets(pass);
+		
+		if(strcmp(user,"delisiozo")==0){
+		log++;}else{
+		printf("[!]Username Salah");}
+		
+		if(strcmp(pass,"10755")==0){
+		log++;}else{
+		printf("\n[!]Password Salah");}
+	}
+	printf("Berhasil Login");
+	menu:
+	system("cls");
+	printf("\n\n===LOMBA KEMERDEKAAN===");
+	printf("\n[1]Isi data pelanggan");
+	printf("\n[2]Laporan Pendapatan");
+	printf("\n[3]Giveaway");
+	printf("\n[0]Keluar");
+	printf("\nMasukan Menu: ");scanf("%d", &menu);
+ switch(menu){
+			case 1 :
+				for(p=0; p<5;){
+				printf("\nBanyak Pelanggan yang datang: ");scanf("%d", &p);
+					if(p<5){
+					printf("\n[!]Pelanggan tidak boleh kurang dari 5");
+						}
+				}
+				p1=p-1;
+				p2=p-p1;
+				bayar=0;
+				bayar2=0;
+				tot=0;
+				do{
+					//nama output paling besar, 1 input,  2 output terkecil, 3 outuput besar 2, 4, output kecil 2//
+						printf("\n==Pelanggan no-%d==", p2);
+						printf("\nMasukan Nama: ");fflush(stdin);gets(nama1);
+						printf("\nMasukan Email: ");fflush(stdin);gets(email1);
+						printf("\nMasukan Total Bayar: ");scanf("%f", &bayar1);
+						p2++;
+						tot=tot+bayar1;
+						if(bayar>bayar1){
+							bayar2=bayar1;
+							strcpy(nama2,nama1);//kecil
+							strcpy(email2,email1);//kecil
+							
+						}else  if(bayar1>bayar){
+						bayar2=bayar;
+						bayar=bayar1;
+						strcpy(nama2,nama);//kecil
+						strcpy(nama,nama1);
+						strcpy(email2,email);//kecil
+						strcpy(email,email1);
+						}
+					} 	while(p2<p+1);
+						printf("\nBerhasil isi data pelanggan");
+						goto menu;
+			case 2:
+				printf("\nTotal Pendapatan: %.2f",tot);
+				printf("\nData pelanggan dengan total bayar tertinggi");
+				printf("\n\nNama : %s",nama);
+				printf("\n\nEmail : %s",email);
+				printf("\n\nTotal Bayar : %.2f",bayar);
+					
+				printf("\n\nData pelanggan dengan total bayaran terendah");
+				printf("\n\nNama : %s",nama2);
+				printf("\n\nEmail : %s",email2);
+				printf("\n\nTotal Bayar : %f.2",bayar2);
+				getche();
+				goto menu;
+			case 3:
+				x=rand() % 100+1;
+				y=rand() % 100+1;
+				z=rand() % 100+1;
+				printf("------Pemenang Giveaway------");
+				printf("\n%d -Mendapatkan 1 buah oven",x);
+				printf("\n%d -Mendapatkan 1 buah teflon",y);
+				printf("\n%d -Mendapatkan 1 set piring cantik",z);
+				getche();
+				goto menu;
+			
+			}
+
+		
+	return 0;
+}
+
+
+	
+		
+	
+		
+
