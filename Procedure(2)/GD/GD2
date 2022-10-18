@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//Paulus Pandu Windito-B-200710755//
+#define harga 100000.00;
+typedef char string [50];
+
+void inisialisasi(float *total,int *status);
+void hitungluas(int *luas,int p,int l);
+void hitungtotal(float *total, int luas);
+void hitungkembalian(float total, float *uang);
+void tampildata(float total, int p, int l,int luas,string nama,float kembalian);
+void prototypekolam(int p, int l);
+
+
+int main(int argc, char *argv[]) {
+	int pil, status, panjang, lebar, luas;
+	float total, uang;
+	string nama;
+	
+	inisialisasi(&total,&status);
+	
+	do{
+		system("cls");
+		printf("\t\t GUIDED 2 \n");
+		printf("\t |BUDI's CONSTRUCTION|\n");
+		printf("\n 1. Input Data");
+		printf("\n 2. Pembayaran");
+		printf("\n 3. Tampil dan Cetak");
+		printf("\n 0. Keluar");
+		printf("Pilihan >>> ");scanf("%d", &pil);
+		
+		switch (pil){
+			case 1:
+				if(status==0){
+					printf("\n\t INPUT DATA\n");
+					do{
+						printf("\n\t Nama Client : ");fflush(stdin);gets(nama);
+						if(strlen(nama)<=0){
+							printf("\t\t Nama tidak boleh kosong [!]");
+						}else{}
+					}while(strlen(nama)<=0);
+	
+					do{
+						printf("\n\t Panjang Kolam (m): ");scanf("%d", &panjang);
+						printf("\t Lebar Kolam (m): ");scanf("%d", &lebar);
+						if(panjang<2 || lebar<2){
+							printf("\t\t Panjang dan Lebar Kolam Minimal 2 meter[!]");
+						}else{}
+					}while(panjang<2||lebar<2);
+					printf("\n Data telah terisi[!]");
+					status=1;
+				}else{
+					printf("\n\n\t Data telah terisi[!]");
+				}break;	
+			case 2:
+				if(status==0){
+					printf("\n\n\t Akses Menu 1 Untuk Input Data[!]");
+				}else if(status==1){
+					hitungluas(&luas,panjang,lebar);
+					hitungtotal(&total,luas);
+					printf("\n\t Total Harga : Rp.%.2f", total);
+					do{
+						printf("\n\t Pembayaran : ");scanf("%f", &uang);
+						if(uang<total){
+							printf("\n\t\t Uang tidak cukup[!]");
+						}else{}
+					}while(uang<total);
+					hitungkembalian(total,&uang);
+					printf("\n\t Transaksi Berhasil[!]");
+					printf("\n\t Kembalian Anda = Rp.%.2f",uang);
+					status=2;
+				}else {
+					printf("\n\n\t Sudah terbayar[!]");
+				}break;
+			case 3:
+				if(status==0){
+					printf("\n\n\t Akses Menu 1 untuk Input Data[!]");
+				}else if(status==1){
+					printf("\n\n\t Akse Menu 2 untuk Pembayaran[!]");
+				}else{
+					tampildata(total,panjang,lebar,luas,nama,uang);
+					printf("\nPrototype Kolam Renang\n");
+					prototypekolam(panjang,lebar);
+				}break;
+			case 0:
+				printf("\n\n\t TERIMAKASIH~\n");
+				break;
+			default:
+				printf("Pilihan tidak tersedia[!]");
+				break;
+		}getch();
+	}while(pil!=0);
+	
+	
+	return 0;
+}
+
+void inisialisasi(float *total,int *status){
+	*total=0;
+	*status=0;
+}
+
+void hitungluas(int *luas, int p,int l){
+	*luas=p*l;
+}
+
+void hitungtotal(float *total,int luas){
+	*total=(float) luas*harga;
+}
+
+void hitungkembalian(float total,float *uang){
+	*uang=*uang - total;
+}
+
+
+void tampildata(float total, int p, int l, int luas, string nama, float kembalian){
+	printf("\n\t\t Tampil Data Client \n");
+	printf("\n\t Nama : %s",nama);
+	printf("\n\t Panjang Kolam : %d m",p);
+	printf("\n\t Lebar Kolam : %d m",l);
+	printf("\n\t Luas Kolam : %d m^2",luas);
+	printf("\n\t Harga Total : Rp.%.2f",total);
+	printf("\n\t Kembalian : Rp.%.2f",kembalian);
+}
+void prototypekolam(int p, int l){
+	int i,j;
+	
+	for(i=0;i<p;i++){
+		for(j=0;j<l;j++){
+			if(j==0||j==l-1){
+				printf("|");
+			}else if(i==0||i==p-1){
+				printf("--");
+			}else{
+				printf(" ");
+			}
+		} printf("\n");
+	}
+}

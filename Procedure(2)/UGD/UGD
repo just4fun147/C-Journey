@@ -1,0 +1,212 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+//Paulus Pandu Windito-B-200710755 //
+//Bonus 1+2//
+typedef char string [100];
+void hitungGame (string game,string kodegame,float *hargapcs,float *persen,float *persenan,int *jumlahbeli,int *harga,float *diskon, float *hartot);
+void itung(float *hartot,float *bayar,float *kembali);
+
+typedef char string [100];
+int main(int argc, char *argv[]) {
+	int log,pil,jumlahbeli,status;
+	string user, pass,nama,no,tanggalbeli,game,kodegame,tanggal;
+	float harga,bayar,hargapcs,persen,persenan,diskon,hartot,kembali;
+	status=0;
+	login:
+	printf("====WarOEng Game SUBUR====");
+	while(log<2){
+		log=0;
+		printf("\nUsername(Subur): ");fflush(stdin);gets(user);
+		printf("\nPassword(0755): ");fflush(stdin);gets(pass);
+		
+		if(strcmp(user,"Subur")==0){
+		log++;}else{
+		printf("[!]Username Salah");}
+		
+		if(strcmp(pass,"0755")==0){
+		log++;}else{
+		printf("\n[!]Password Salah");}
+	}
+	tanggal:
+	printf("(BONUS) Masukan Tanggal (DD-MM-YY): "); fflush(stdin);gets(tanggal);
+	if(strlen(tanggal)!=8){
+		printf("Tanggal Invalid [!]\n");
+		goto tanggal;
+	}
+	printf("Login Berhasil;[!]");
+	getch();
+	pilihan:
+	system ("cls");
+
+	
+	printf("Waroeng Game SUBUR");
+	printf("\n----------------------------------");
+	printf("\nTanggal:                    %s",tanggal);
+	printf("\n[1]. Input Data");
+	printf("\n[2]. Pembayaran");
+	printf("\n[3]. Tampil Data");
+	printf("\n[4]. Hapus Data");
+	printf("\n[5]. Exit Program");
+	printf("\n[6]. Logout (BONUS)");
+	printf("\n[7]. Stok Rak CD (Bonus)");
+	printf("\nPilihan >>> ");scanf("%d", &pil);
+	
+	switch(pil){
+		case 1: 
+		if(status==0){
+		printf("\nSilahkan input data pembeli:");
+		nama:
+		printf("\nNama Pembeli: ");fflush(stdin);gets(nama);
+		if(strcmp(nama,"")==0){
+			printf("Nama tidak boleh kosong[!]");
+			goto nama;
+		}
+		nomor:
+		printf("Nomor Telepon: ");fflush(stdin);gets(no);
+		if(strcmp(no,"")==0){
+			printf("Nomor telepon tidak boleh kosong[!]\n");
+			goto nomor;
+		}
+		tb:
+		printf("Tanggal Pembelian: ");fflush(stdin);gets(tanggalbeli);
+		if(strcmp(tanggalbeli,"")==0){
+			printf("Tanggal pembelian tidak boleh kosong[!\n]");
+			goto tb;
+		}
+		printf("Nama Game (Sepidermen/Mario Fros/Sonik Hedehog): ");fflush(stdin);gets(game);
+		beli:
+		printf("Jumlah Pembelian: ");scanf("%d", &jumlahbeli);
+			if(jumlahbeli>3){
+			printf("Jumlah tidak boleh 0 dan maksimal 3");
+			goto beli;	
+		}else if(jumlahbeli<1){
+			printf("Jumlah tidak boleh 0 dan maksimal 3");
+			goto beli;
+		}else{
+		hitungGame(game,kodegame,&hargapcs,&persen,&persenan,&jumlahbeli,&harga,&diskon,&hartot);
+		printf("Total Penjualan Game:%d",jumlahbeli);
+		}
+	
+		
+		status=1;
+		}else {
+			printf("Data telah terisi lakukan pembayaran dahulu[!]");
+		}
+		getch();
+		goto pilihan;
+		
+		case 2:
+			if(status == 0){
+				printf("Data kosong, input data dahulu[!]");
+				getch();
+				goto pilihan;
+				
+			}else{
+			
+			printf("Nota Pembayaran:");
+			printf("\nHarga Akhir:Rp%.2f ",hartot);
+			bayar:
+			printf("\nMasukan Uang: ");scanf("%f", &bayar);
+			if(bayar<hartot){
+				printf("Uang anda kurang[!]");
+				getch();
+				goto bayar;
+			}else{
+			
+			itung(&hartot,&bayar,&kembali);
+			printf("\nKembalian:%.2f",kembali);
+			printf("\nTransaksi Berhasil[!]");
+			status=2;
+			getch();
+			goto pilihan;
+			}
+			}
+		
+		case 3:
+			if(status==0){
+			printf("Data kosong, input data dahulu[!]");
+			getch();
+			goto pilihan;
+			}else if(status==1){
+				printf("Akses pembayaran dahulu[!]");
+				getch();
+				goto pilihan;
+			}
+			printf("--Data Pembeli");
+			printf("\nTanggal Pembelian:%s",tanggalbeli);
+			printf("\nNama Pembeli:%s",nama);
+			printf("\nNo Telepon:%s",no);
+			
+			printf("\n\n--Data Game");
+			printf("\nNama Game : %s",game);
+			printf("\nJumlah Pembelian: %d",jumlahbeli);
+			printf("\nCode Game: %s",kodegame);
+			
+			printf("\n\n--Detil Harga");
+			printf("\nHarga 1 pcs Game: %.2f",hargapcs);
+			printf("\nHarga Total: %.2f",hartot);
+			printf("\nDiskon (%):%.2f",persen);
+			printf("\nDiskon (Rp):Rp%.1f",diskon);
+			printf("\nHarga Akhir:Rp%.2f",hartot);
+			printf("\nPembayaran:Rp%.2f",bayar);
+			printf("\nKembalian:Rp%.2f",kembali);
+			
+			getch();
+			goto pilihan;
+		case 4:
+			status=0;
+			getch();
+			goto pilihan;
+		case 5:
+			printf("Keluar Program ...");
+			goto keluar;
+			getch();
+		case 6:
+			printf("Logging out ...");
+			goto login;
+			getch();
+		case 7:
+			printf("STOK SIAP KIRIM~~~");
+			
+			goto login;
+			getch();
+			
+			
+		
+			
+	}
+	
+	keluar:
+	return 0;
+}
+//persen=persatuan,persenan total
+void hitungGame(string game,string kodegame,float *hargapcs,float *persen,float *persenan,int *jumlahbeli,int *harga,float *diskon,float *hartot){
+	if(strcmp(game,"Sepidermen")==0){
+		strcpy(kodegame,"SM15");
+		*hargapcs=850000;
+		*persen=7.5;
+	}else if(strcmp(game,"Mario Fros")==0){
+		strcpy(kodegame,"MF12");
+		*hargapcs=670000;
+		*persen=5;
+	}else if(strcmp(game,"Sonik Hedehog")==0){
+		strcpy(kodegame,"SH10");
+		*hargapcs=550000;
+		*persen=5;
+	}
+	*persenan= *persen * (*jumlahbeli);
+	*harga=*hargapcs * *jumlahbeli;
+	*diskon=*harga * *persenan/100;
+	*hartot=*harga - *diskon;
+
+}
+
+void itung(float *hartot,float *bayar,float *kembali){
+	*kembali=*bayar-*hartot;
+}
+
+
+
+

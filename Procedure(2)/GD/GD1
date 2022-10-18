@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-B-200710755//
+typedef char string [100];
+
+void tukarnilai(int *N1, int *N2);
+void kuadrat(int *nilai);
+
+int main(int argc, char *argv[]) {
+	int nilai1, nilai2;
+	
+	printf("\t\t GUIDED 1 \n");
+	printf("\n Masukan Nilai 1: ");scanf("%d", &nilai1);
+	printf("\n Masukan Nilai 2: ");scanf("%d", &nilai2);
+	printf("\n Input Berhasil [!]");
+	getche();
+	system("cls");
+	
+	printf("\t\t GUIDED 1 \n");
+	printf("\n Nilai 1: %d",nilai1);
+	printf("\n Nilai 2: %d",nilai2);
+	
+	kuadrat(&nilai1);
+	kuadrat(&nilai2);
+	
+	printf("\n\n Setelah di kuadrat");
+	printf("\n Nilai 1: %d",nilai1);
+	printf("\n Nilai 2: %d",nilai2);
+	
+	
+	tukarnilai(&nilai1,&nilai2);
+	
+	printf("\n\n Setelah Nilai1 & Nilai2 ditukar");
+	printf("\n Nilai 1: %d",nilai1);
+	printf("\n Nilai 2: %d",nilai2);
+	
+	return 0;
+}
+
+
+void tukarnilai(int *N1,int *N2){
+	int temp;
+	temp=*N1;
+	*N1=*N2;
+	*N2=temp;
+}
+
+void kuadrat(int *nilai){
+	*nilai=(*nilai) * (*nilai);
+}
