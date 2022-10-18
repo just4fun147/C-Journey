@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main(int argc, char *argv[]) {
+	int x=4, y=3;
+	
+	printf("x = %d\n",x);
+	printf("y = %d\n\n",y);
+	
+	x=y;
+	printf("x = y\n");
+	printf("x = %d\n\n",x);
+	
+	x+=y;
+	printf("x += y\n");
+	printf("x = %d\n\n",x);
+	
+	x-=y;
+	printf("x -= y\n");
+	printf("x = %d\n\n",x);
+	
+	x*=y;
+	printf("x *= y\n");
+	printf("x = %d\n\n",x);
+	
+	x/=y;
+	printf("x /= y\n");
+	printf("x = %d\n\n",x);
+	
+	x%=y;
+	printf("x %%= y\n");
+	printf("x = %d\n\n",x);
+	
+	system("pause");
+	return 0;
+}

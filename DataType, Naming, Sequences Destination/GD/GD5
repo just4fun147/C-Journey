@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef char string[20];
+
+int main(int argc, char *argv[]) {
+	int bilanganBulat;
+	float bilanganReal;
+	char karakter;
+	string deretKarakter;
+	
+	printf("--- Input Data ---\n");
+	printf("Bilangan Bulat : ");scanf("%d", &bilanganBulat);
+	printf("Bilangan Real : ");scanf("%f", &bilanganReal);
+	printf("Karakter : ");karakter = getche();
+	printf("\nDeret Karakter : "); fflush(stdin);gets(deretKarakter);
+	
+	printf("\n--- Tampil Data ---\n");
+	printf("Bilangan Bulat : %d\n", bilanganBulat);
+	printf("Bilangan Real : %.2f\n", bilanganReal);
+	printf("Karakter : %c\n", karakter);
+	printf("Deret Karakter : %s\n", deretKarakter);
+	
+	system ("pause");
+	return 0;
+}

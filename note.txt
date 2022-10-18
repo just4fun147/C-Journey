@@ -1,3 +1,5 @@
 My first programming language to learn data structure
 
-3rd semester college -- 2021
+DEV-C
+
+2nd semester college -- 2021

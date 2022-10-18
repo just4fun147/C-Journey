@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main(int argc, char *argv[]) {
+	int x, y, z;
+	
+	x=29;
+	y=5;
+	
+	printf("x = 29\n");
+	printf("y = 5\n\n");
+	
+	z= x+y;
+	printf ("x + y = %d\n",z);
+	
+	z= x-y;
+	printf ("x - y = %d\n",z);
+	
+	z= x*y;
+	printf ("x * y = %d\n",z);
+	
+	z= x/y;
+	printf ("x / y = %d\n",z);
+	
+	z= x%y;
+	printf ("Sisa pembagiannya %d\n",z);
+	
+	system("pause");
+	return 0;
+}

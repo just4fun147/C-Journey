@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef char string [50];
+
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int npm;
+	float ip, ip1,ip2,ip3,ip4,ip5,ip6,ip7;
+	string nama, angkatan, ps, fakul,dp;
+	
+	printf("--- Input Data---");
+	printf("\nNPM : ");scanf("%d", &npm);
+	printf("Nama Mahasiswa : ");fflush(stdin);gets(nama);
+	printf("Angkatan : ");fflush(stdin);gets(angkatan);
+	printf("Nama Fakultas : ");fflush(stdin);gets(fakul);
+	printf("Program Studi : ");fflush(stdin);gets(ps);
+	printf("Dosen Pembimbing : ");fflush(stdin);gets(dp);
+	printf("\n\tIP Semester 1 : ");scanf("%f", &ip1);
+	printf("\n\tIP Semester 2 : ");scanf("%f", &ip2);
+	printf("\n\tIP Semester 3 : ");scanf("%f", &ip3);
+	printf("\n\tIP Semester 4 : ");scanf("%f", &ip4);
+	printf("\n\tIP Semester 5 : ");scanf("%f", &ip5);
+	printf("\n\tIP Semester 6 : ");scanf("%f", &ip6);
+	printf("\n\tIP Semester 7 : ");scanf("%f", &ip7);
+	
+	ip=ip1+ip2+ip3+ip4+ip5+ip6+ip7;
+	ip=ip/7;
+	
+	printf("Nama Mahasiswa : %s\n",nama);
+	printf("Program Studi : %s\n",ps);
+	printf("Fakultas : %s\n",fakul);
+	printf("Rata-rata IP : %f\n",ip);
+	scanf("%", &);
+	system("pause");
+	return 0;
+}

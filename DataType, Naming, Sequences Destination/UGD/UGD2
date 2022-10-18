@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Paulus Pandu Windito-b_200710755//
+
+int main(int argc, char *argv[]) {
+	int awal,a,b,c,d,e,f,g,h,i,j;
+	
+
+	printf("Jumlah awal ayam : ");scanf("%d", &awal);
+	
+		a= 7943+awal;
+		b= a-4476;
+		c= 3*b;
+		d= c+awal;
+		e= d+d/5;
+		f= e-e*19/100;
+		g=f/4;
+		h=g*2;
+		i=f*2;
+		j=i*30000;
+		k=h*2;
+	
+	
+		
+	
+	printf("-Jumlah Ayam-");
+	printf("\nHari Pertama : %d",a);
+	printf("\nHari Kedua : %d",b);
+	printf("\nHari Ketiga : %d",c);
+	printf("\nHari Keempat : %d",d);
+	printf("\nHari Kelima : %d",e);
+	printf("\nHari Keenam : %d",f);
+	printf("\nSetiap tempat pemotongan mendapat : %d ayam",g);
+	printf("\nBerat ayam yang dikirim ke tiap tempat pemotonga : %d kg",h);
+	printf("\nPendapatan peternak keseluruhan ayam : %d",j);
+	printf("\nPendapatan peternak tiap tempat pemotongan : %d",k);
+	
+	
+	return 0;
+}

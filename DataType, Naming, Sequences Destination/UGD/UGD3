@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef char string [20];
+
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int uang,a1,a2,a3,a4,a5,a6,a7;
+	
+	printf("Masukan Jumlah Uang: ");scanf("%d",&uang);
+		a1=uang/100000;
+		a2=uang%100000/50000;
+		a3=uang%100000%50000/20000;
+		a4=uang%100000%50000%20000/10000;
+		a5=uang%100000%50000%20000%10000/5000;
+		a6=uang%100000%50000%20000%10000%5000/2000;
+		a7=uang%100000%50000%20000%10000%5000%2000/1000;
+	
+	printf("\nJumlah pecahan 100 ribu: %d", a1);
+	printf("\nJumlah pecahan 50 ribu: %d", a2);
+	printf("\nJumlah pecahan 20 ribu: %d", a3);
+	printf("\nJumlah pecahan 10 ribu: %d", a4);
+	printf("\nJumlah pecahan 5 ribu: %d", a5);
+	printf("\nJumlah pecahan 2 ribu: %d", a6);
+	printf("\nJumlah pecahan seribu: %d", a7);
+	
+	return 0;
+}

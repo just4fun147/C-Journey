@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+//Paulus Pandu Windito-B-200710755//
+
+int main(int argc, char *argv[]) {
+	int a,b,c,x1,x2,x3,y1,y2,y3;
+	
+	printf("--Input Data--");
+	printf("\nAngka Pertama: ");scanf("%d",&a);
+	printf("\nAngka Kedua: ");scanf("%d",&b);
+	printf("\nAngka Ketiga: ");scanf("%d",&c);
+		//perbandingan a dengan b=x3//
+		x1=(a+b);
+		x2=abs(a-b);
+		x3=(x1+x2)/2;
+		//perbandingan x3 dengan c=y3//
+		y1=(x3+c);
+		y2=abs(x3-c);
+		y3=(y1+y2)/2;
+	
+	printf("Angka tertinggi adalah : %d",y3);
+	return 0;
+}

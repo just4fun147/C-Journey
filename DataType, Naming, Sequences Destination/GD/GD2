@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define NUM 5
+#define NUM2 4.5
+#define CHR 'h'
+
+
+int main(int argc, char* argv[]) {
+	int x;
+	float y;
+	char z;
+	
+	x=NUM;
+	y=NUM2;
+	z=CHR;
+	
+	printf("Increment : menambah value variable sebanyak 1 sesuai tipe data variable\n");
+	printf("Decrement : mengurangi value variable sebanyak 1 sesuai tipe data variable\n\n");
+	
+	
+	printf("x = %d\n", x);
+	printf("y = %f\n", y);
+	printf("z = %c\n\n", z);
+	
+	printf("++x = %d\n", ++x);
+	printf("--x = %d\n\n", --x);
+	
+	printf("++y = %f\n", ++y);
+	printf("--y = %f\n\n", --y);
+	
+	printf("++z = %c\n", ++z);
+	printf("--z = %c\n\n", --z);
+	
+	system("pause");
+	return 0;
+}
