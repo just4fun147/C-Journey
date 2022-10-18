@@ -1,0 +1,537 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//Paulus Pandu Windito-B-200710755//
+typedef char string [30];
+
+typedef struct{
+	string namaPegawai;
+	int idPegawai,umur;
+	float reward;
+}Pegawai_10755;
+
+typedef struct{
+	string nama,negara,pulau;
+	int id,seme;
+	Pegawai_10755;
+}Perusahaan_10755;
+
+//void show(Pegawai_10755 *a,Perusahaan_10755 *b, int peru,string status);
+void inputPegawai(Pegawai_10755 *a,int z,string temp);
+void inputPerusahaan(Perusahaan_10755 *b,Perusahaan_10755 b1,Perusahaan_10755 b2,Perusahaan_10755 b3,int k,string temp);
+void show(Perusahaan_10755 b1,Perusahaan_10755 b2,Perusahaan_10755 b3, Pegawai_10755 a1,Pegawai_10755 a2,Pegawai_10755 a3,string status1,string status2,string status3,int peru,int ceka,int cekb,int cekc,float reward1,float reward2,float reward3);
+void reguler(string temp,Perusahaan_10755 *b);
+void express(string temp,Perusahaan_10755 *b);
+void init(string status1,string status2,string status3);
+
+
+int main(int argc, char *argv[]) {
+	Pegawai_10755 a1,a2,a3;	
+	Perusahaan_10755 b1,b2,b3;
+	int menu,cek,input,peru,cek1,input2,k,z,ceka,cekb,cekc,i;
+	float reward1,reward2,reward3;
+	string temp,temps,status1,status2,status3;
+	cek=0;
+	cek1=0;
+	ceka=0;
+	cekb=0;
+	cekc=0;
+	peru=0;
+	k=1;
+	z=1;
+	reward1=0;
+	reward2=0;
+	reward3=0;
+	
+	init(status1,status2,status3);
+	menu:
+	system("cls");
+	printf("\t\t---=== Program Training dari Pemerintah ===---");
+	printf("\n\t[1]. Input Data");
+	printf("\n\t[2]. Update Data Program Training");
+	printf("\n\t[3]. Delete Data Pegawai");
+	printf("\n\t[0]. Exit");
+	printf("\n\t>>>");scanf("%d", &menu);
+	
+	switch(menu){
+		case 1:
+			system("cls");
+			show(b1,b2,b3,a1,a2,a3,status1,status2,status3,peru,ceka,cekb,cekc,reward1,reward2,reward3);
+			printf("\n");
+			printf("\t\t===================================");
+			printf("\n\t\t[1]. Input Data Perusahaan");
+			printf("\n\t\t[2]. Input Data Pegawai");
+			printf("\n\t>>>");scanf("%d", &input);
+				switch(input){
+					case 1:
+						if(peru==0){	
+						inputPerusahaan(&b1,b1,b2,b3,1,temp);
+							peru++;
+							getch();
+							goto menu;
+						}else if(peru==1){	
+							inputPerusahaan(&b2,b1,b2,b3,2,temp);
+							peru++;
+							getch();
+							goto menu;
+						}else if(peru==2){	
+							inputPerusahaan(&b3,b1,b2,b3,3,temp);
+							peru++;
+							getch();
+							goto menu;
+						}
+						else{
+							printf("\n\t\t===================================");
+							printf("\n\t[!] Data Perusahaan Sudah Penuh");
+							getch();
+							goto menu;
+						}
+					
+					
+					case 2:
+						if(peru==0){
+							printf("\n\n[!] Data Perusahaan Masih Kosong");
+							goto menu;
+						}
+						printf("\t\t===================================");
+						do{	printf("\n\tPerusahaan Asal		:");fflush(stdin);gets(temp);
+							if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+							printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+							}else if(strcmp(temp,b1.nama)!=0&&strcmp(temp,b2.nama)!=0&&strcmp(temp,b3.nama)!=0){
+								printf("\t[!] Perusahaan Tidak Ditemukan");
+								getch();
+								goto menu;
+							}
+						}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+						if(strcmp(temp,b1.nama)==0){
+							if(ceka==1){
+								printf("\t[!] Data Pegawai Sudah Terisi");
+								getch();
+								goto menu;
+							}
+								inputPegawai(&a1,1,temp);
+								cek1++;
+								ceka++;
+								getch();
+								goto menu;	
+						}
+							if(strcmp(temp,b2.nama)==0){
+								if(cekb==1){
+								printf("\t[!] Data Pegawai Sudah Terisi");
+								getch();
+								goto menu;
+							}
+								inputPegawai(&a2,2,temp);
+								cek1++;
+								cekb++;
+								getch();
+								goto menu;		
+						}
+							if(strcmp(temp,b3.nama)==0){
+								if(cekc==1){
+								printf("\t[!] Data Pegawai Sudah Terisi");
+								getch();
+								goto menu;
+							}
+								inputPegawai(&a3,3,temp);
+								cek1++;
+								cekc++;
+								getch();
+								goto menu;		
+						}
+							printf("\n\t[!] Perusahaan Tidak ditemukan");
+							getch();
+							goto menu;
+				}
+			getch();
+			goto menu;
+			
+		case 2:
+			if(peru<1){
+				printf("\t[!] Data Perusahaan Masih Kosong");
+				getch();
+				goto menu;
+			}
+			if(peru<2){
+				printf("\t[!] Data Perusahaan Masih Kurang dari 2");
+				getch();
+				goto menu;
+			}
+			if(cek1==0){
+				printf("\t[!] Data Pegawai Masih Kosong");
+				getch();
+				goto menu;
+			}
+				system("cls");
+				show(b1,b2,b3,a1,a2,a3,status1,status2,status3,peru,ceka,cekb,cekc,reward1,reward2,reward3);
+				printf("\n");
+				printf("\n\t\t===================================");
+				printf("\n\n\t[1] Pengiriman Reguler");
+				printf("\n\t[2] Pengiriman Express");
+				printf("\n\t[3] Barang Diterima");
+				printf("\n\t>>>");scanf("%d", &input2);
+				switch(input2){
+					case 1:
+						printf("\n\t\t===================================");
+						do{	printf("\n\tNama Pegawai		:");fflush(stdin);gets(temp);
+							if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+							printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+							}else if(strcmp(temp,a1.namaPegawai)!=0&&strcmp(temp,a2.namaPegawai)!=0&&strcmp(temp,a3.namaPegawai)!=0){
+								printf("\t[!] Nama Pegawai Tidak Ditemukan");
+								getch();
+								goto menu;
+							}
+						}while(strcmpi(temp,"-")==0||strlen(temp)<=0);	
+						if(strcmp(temp,a1.namaPegawai)==0&&strcmp(status1,"Available")==0){						
+							reguler(temp,&b1);
+							strcpy(status1,"Reguler");
+							getch();
+							goto menu;
+						}else if(strcmp(temp,a2.namaPegawai)==0&&strcmp(status2,"Available")==0){							
+							reguler(temp,&b2);	
+							strcpy(status2,"Reguler");
+							getch();
+							goto menu;
+						}else if(strcmp(temp,a1.namaPegawai)==0&&strcmp(status3,"Available")==0){
+							reguler(temp,&b3);
+							strcpy(status3,"Reguler");
+							getch();
+							goto menu;
+						}else if(strcmp(status1,"Reguler")==0){
+							printf("\n\t[!] Pegawai Masih dalam Proses Pengiriman Reguler");
+							
+						}else if(strcmp(status2,"Express")==0){
+							printf("\n\t[!] Pegawai Masih dalam Proses Pengiriman Express");
+							
+						}
+						getch();
+						goto menu;
+					case 2:
+						printf("\n\t\t===================================");
+						do{	printf("\n\tNama Pegawai		:");fflush(stdin);gets(temp);
+							if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+							printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+							}else if(strcmp(temp,a1.namaPegawai)!=0&&strcmp(temp,a2.namaPegawai)!=0&&strcmp(temp,a3.namaPegawai)!=0){
+								printf("\t[!] Nama Pegawai Tidak Ditemukan");
+								getch();
+								goto menu;
+							}
+						}while(strcmpi(temp,"-")==0||strlen(temp)<=0);	
+						if(strcmp(temp,a1.namaPegawai)==0&&strcmp(status1,"Available")==0){
+							express(temp,&b1);
+							strcpy(status1,"Express");
+							getch();
+							goto menu;
+						}else if(strcmp(temp,a2.namaPegawai)==0&&strcmp(status2,"Available")==0){
+							express(temp,&b2);
+							strcpy(status2,"Express");	
+							getch();
+							goto menu;
+						}else if(strcmp(temp,a1.namaPegawai)==0&&strcmp(status3,"Available")==0){
+							express(temp,&b3);
+							strcpy(status3,"Express");
+							getch();
+							goto menu;
+						}else if(strcmp(status1,"Reguler")==0){
+							printf("\n\t[!] Pegawai Masih dalam Proses Pengiriman Reguler");
+							
+						}else if(strcmp(status2,"Express")==0){
+							printf("\n\t[!] Pegawai Masih dalam Proses Pengiriman Express");
+							
+						}
+						getch();
+						goto menu;
+					
+					case 3:
+						printf("\n\t\t===================================");
+						do{	printf("\n\tNama Pegawai		:");fflush(stdin);gets(temp);
+							if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+							printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+							}else if(strcmp(temp,a1.namaPegawai)!=0&&strcmp(temp,a2.namaPegawai)!=0&&strcmp(temp,a3.namaPegawai)!=0){
+								printf("\t[!] Nama Pegawai Tidak Ditemukan");
+								getch();
+								goto menu;
+							}
+							}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+						printf("\n\tYakin Barang Sudah Diterima?[Y/N]");fflush(stdin);gets(temps);
+						if(strcmpi(temps,"Y")==0){
+							if(strcmp(temp,a1.namaPegawai)==0&&strcmp(status1,"Available")!=0){
+							if(strcmp(status1,"Reguler")==0){
+							reward1=reward1+30000;
+							}
+							if(strcmp(status1,"Express")==0){
+								reward1=reward1+50000;
+							}
+							strcpy(status1,"Available");
+						
+							}
+							if(strcmp(temp,a2.namaPegawai)==0&&strcmp(status2,"Available")!=0){
+							if(strcmp(status1,"Reguler")==0){
+								reward2=reward2+30000;
+							}
+							if(strcmp(status1,"Express")==0){
+								reward2=reward2+50000;
+							}
+							strcpy(status2,"Available");
+							}
+							if(strcmp(temp,a3.namaPegawai)==0&&strcmp(status3,"Available")!=0){
+							
+							if(strcmp(status1,"Reguler")==0){
+								reward3=reward3+30000;
+							}
+							if(strcmp(status1,"Express")==0){
+								reward3=reward3+50000;
+							}
+							strcpy(status3,"Available");
+							}
+						}
+						getch();
+						goto menu;
+						
+				
+				}
+				
+		case 3:
+			show(b1,b2,b3,a1,a2,a3,status1,status2,status3,peru,ceka,cekb,cekc,reward1,reward2,reward3);
+			printf("\n");
+			if(peru<1){
+				printf("\t[!] Data Perusahaan Masih Kosong");
+				getch();
+				goto menu;
+			}
+			if(peru<2){
+				printf("\t[!] Data Perusahaan Masih Kurang dari 2");
+				getch();
+				goto menu;
+			}
+			if(cek1<1){
+				printf("\t[!] Data Pegawai Masih Kosong");
+				getch();
+				goto menu;
+			}
+			printf("\n\t\t===================================");
+			do{	printf("\n\tNama Pegawai		:");fflush(stdin);gets(temp);
+			if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+				printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+				}else if(strcmp(temp,a1.namaPegawai)!=0&&strcmp(temp,a2.namaPegawai)!=0&&strcmp(temp,a3.namaPegawai)!=0){
+					printf("\t[!] Nama Pegawai Tidak Ditemukan");
+					getch();
+					goto menu;
+					}	
+				}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+					if(strcmp(temp,a1.namaPegawai)==0){
+						if(strcmp(status1,"Reguler")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Reguler");
+							getch();
+							goto menu;
+						}
+						if(strcmp(status1,"Express")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Express");
+							getch();
+							goto menu;
+						}
+						printf("\n\tYakin Data Pegawai Akan Dihapus? [Y/N]");fflush(stdin);gets(temps);
+						if(strcmpi(temps,"Y")==0){
+							ceka=0;
+						}
+					
+					}
+					if(strcmp(temp,a2.namaPegawai)==0){
+						if(strcmp(status2,"Reguler")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Reguler");
+							getch();
+							goto menu;
+						}
+						if(strcmp(status2,"Express")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Express");
+							getch();
+							goto menu;
+						}
+						printf("\n\tYakin Data Pegawai Akan Dihapus? [Y/N]");fflush(stdin);gets(temps);
+						if(strcmpi(temps,"Y")==0){
+								ceka=0;
+						}
+					
+					}
+					if(strcmp(temp,a3.namaPegawai)==0){
+						if(strcmp(status3,"Reguler")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Reguler");
+							getch();
+							goto menu;
+						}
+						if(strcmp(status3,"Express")==0){
+							printf("\t[!] Pegawai Masih dalam Proses Pengiriman Express");
+							getch();
+							goto menu;
+						}
+						printf("\n\tYakin Data Pegawai Akan Dihapus? [Y/N]");fflush(stdin);gets(temps);
+						if(strcmpi(temps,"Y")==0){
+								ceka=0;
+						}
+					
+					} 
+					getch();
+					goto menu;
+	}
+	return 0;
+}
+
+void inputPerusahaan(Perusahaan_10755 *b,Perusahaan_10755 b1,Perusahaan_10755 b2,Perusahaan_10755 b3,int k,string temp){
+	printf("\t\t===================================");
+	printf("\n\n\t\t\t Isilah Data Berikut dengan Lengkap");
+	
+	do{	printf("\n\tNama Perusahaan		:");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Perusahaan Tidak Boleh Kosong");
+		}else if(strcmp(temp,b1.nama)==0||strcmp(temp,b2.nama)==0||strcmp(temp,b3.nama)==0){
+		printf("\t[!] Perusahaan sudah terdaftar");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0||strcmp(temp,b1.nama)==0||strcmp(temp,b2.nama)==0||strcmp(temp,b3.nama)==0);
+
+	strcpy((*b).nama,temp);
+	
+	
+	do{	printf("\n\tNegara			:");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Negara Tidak Boleh Kosong");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+
+	strcpy((*b).negara,temp);
+	
+	
+	printf("\n\tNomor ID		:%d",k);
+	
+	
+		do{	printf("\n\tPulau			:");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Pulau Tidak Boleh Kosong");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+
+	strcpy((*b).pulau,temp);
+	
+	printf("\n\n\t[!] Data Perusahaan Berhasil Disimpan");
+}
+
+void inputPegawai(Pegawai_10755 *a,int z,string temp){
+	printf("\n\t\t\tIsilah Data Berikut dengan Lengkap");
+	do{	printf("\n\tNama Pegawai		:");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Nama Pegawai Tidak Boleh Kosong");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+
+	strcpy((*a).namaPegawai,temp);
+	
+	printf("\n\tNomor ID		: %d",z);
+	
+	do{printf("\n\tUmur			: ");scanf("%d", &(*a).umur);
+		if((*a).umur<=19){
+		printf("\t[!] Umur Harus di Atas 20");
+		}
+	}while((*a).umur<=19);
+
+	strcpy((*a).namaPegawai,temp);
+	
+	printf("[!] Data Pegawai Berhasil Disimpan");
+}
+
+void reguler(string temp,Perusahaan_10755 *b){
+
+	do{	printf("\n\tPulau		: ");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Pulau Tidak Boleh Kosong");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+		if(strcmp(temp,(*b).pulau)==0){
+			do{	printf("\n\tNegara		: ");fflush(stdin);gets(temp);
+					if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+					printf("\t[!] Negara Tidak Boleh Kosong");
+					}
+				}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+				if(strcmp(temp,(*b).negara)==0){
+					printf("\n\t[!] Status Pegawai Berhasil Diupdate : Reguler");
+
+										
+					}else{
+						printf("\n\t[!] Tujuan Berada di Negara yang Berbeda");
+					}
+
+				}else{
+						printf("\n\t[!] Tujuan Berada di Pulau yang Berbeda");
+								
+			}
+					
+}
+
+void express(string temp,Perusahaan_10755 *b){
+	do{	printf("\n\tPulau		: ");fflush(stdin);gets(temp);
+		if(strcmpi(temp,"-")==0||strlen(temp)<=0){
+		printf("\t[!] Pulau Tidak Boleh Kosong");
+		}
+	}while(strcmpi(temp,"-")==0||strlen(temp)<=0);
+			if(strcmp(temp,(*b).pulau)==0){
+					printf("\n\t[!] Tujuan Berada di Pulau yang Sama");
+				}else{
+					printf("\n\tNegara		: ");fflush(stdin);gets(temp);
+					printf("\n\t[!] Status Pegawai Berhasil Diupdate : Express");
+					}
+	}
+
+
+void init(string status1,string status2,string status3){
+
+	strcpy(status1,"Available");
+	strcpy(status2,"Available");
+	strcpy(status3,"Available");
+
+
+}
+void show(Perusahaan_10755 b1,Perusahaan_10755 b2,Perusahaan_10755 b3, Pegawai_10755 a1,Pegawai_10755 a2,Pegawai_10755 a3,string status1,string status2,string status3,int peru,int ceka,int cekb,int cekc,float reward1,float reward2,float reward3){
+	if(peru==0){
+		
+	}
+	if(peru>=1){
+		printf("\tNama Perusahaan		: %s",b1.nama);
+		printf("\n\tNomor ID		: 1");
+		printf("\n\tNegara			: %s",b1.negara);
+		printf("\n\tPulau			: %s",b1.pulau);
+		if(ceka==1){
+			printf("\n\t\tNama Pegawai		: %s",a1.namaPegawai);
+			printf("\n\t\tNomor ID		: 2");
+			printf("\n\t\tUmur			: %d",a1.umur);
+			printf("\n\t\tStatus			: %s",status1);	
+			printf("\n\t\tReward Selama Training	: %.2f",reward1);
+		}
+		if(peru>=2){
+		printf("\n\n\tNama Perusahaan		: %s",b2.nama);
+		printf("\n\tNomor ID		: 2");
+		printf("\n\tNegara			: %s",b2.negara);
+		printf("\n\tPulau			: %s",b2.pulau);
+		if(cekb==1){
+			printf("\n\t\tNama Pegawai		: %s",a2.namaPegawai);
+			printf("\n\t\tNomor ID		: 3");
+			printf("\n\t\tUmur			: %d",a2.umur);
+			printf("\n\t\tStatus			: %s",status2);	
+			printf("\n\t\tReward Selama 		: %.2f",reward2);
+			}
+		}
+		if(peru>=3){
+		printf("\n\n\tNama Perusahaan		: %s",b3.nama);
+		printf("\n\tNomor ID		: 3");
+		printf("\n\tNegara			: %s",b3.negara);
+		printf("\n\tPulau			: %s",b3.pulau);
+		if(cekc==1){
+			printf("\n\t\tNama Pegawai		: %s",a3.namaPegawai);
+			printf("\n\t\tNomor ID		: 4");
+			printf("\n\t\tUmur			: %d",a3.umur);
+			printf("\n\t\tStatus			: %s",status3);	
+			printf("\n\t\tReward Selama Training	: %.2f",reward3);
+		}
+	}
+	}
+	
+	
+	
+}

@@ -1,0 +1,164 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//Paulus Pandu Windito-B-200710755//
+typedef char string [30];
+typedef struct{
+	string nama;
+	string npm;
+	int umur;
+}Mahasiswa;
+
+void init(Mahasiswa *M);
+void data(Mahasiswa *M);
+void input(Mahasiswa *M);
+void show(Mahasiswa M);
+
+int isEmpty(Mahasiswa M);
+int isAllEmpty(Mahasiswa M1, Mahasiswa M2);
+int isFound(Mahasiswa M,string search);
+
+
+int main(int argc, char *argv[]) {
+	
+	int menu;
+	Mahasiswa M1,M2;
+	string cariNama,confirm;
+	
+	init(&M2);
+	data(&M1);
+	
+	do{
+		system("cls");
+		printf("\n\t ---== Data Mahasiswa ==---");
+		printf("\n\t [1]. Input Data Mahasiswa 2");
+		printf("\n\t [2]. Update Data Mahasiswa");
+		printf("\n\t [3]. Tampil Data Mahasiswa");
+		printf("\n\t [4]. Delete Data Mahasiswa 2");
+		printf("\n\t [0]. Exit");
+		printf("\n\t >>>");scanf("%d", &menu);
+		
+		switch(menu){
+			case 1:
+				if(isEmpty(M2)){
+					input(&M2);
+					printf("\n\t [!] Berhasil Input Data Mahasiswa");
+				}else
+					printf("\n\t [!] Data Mahasiswa sudah diinput");
+				
+				break;
+			case 2:
+				if(!isAllEmpty(M1,M2)){
+					printf("\n\t Cari Nama yang ingin diubah :");fflush(stdin);gets(cariNama);
+					if(isFound(M1,cariNama)){
+						printf("\n\t ---== Data Lama ==---");
+						show(M1);
+						printf("\n\t ---== Data Baru ==---");
+						input(&M1);
+						printf("\n\t[!] Berhasil Mengubah data mahasiswa 1");
+					}else if(isFound(M2,cariNama)){
+						printf("\n\t ---== Data Lama ==---");
+						show(M2);
+						printf("\n\t ---== Data Baru ==---");
+						input(&M2);
+						printf("\n\t[!] Berhasil Mengubah data mahasiswa 2");
+					}else{
+						printf("\n\t [!] Nama tidak ditemukan");
+					}
+				}else{
+						printf("\n\t [!] Data mahasiswa masih kosong");
+					}
+					break;
+			case 3:
+				if(!isEmpty(M1) || !isEmpty(M2)){
+					if(!isEmpty(M1)){
+						printf("\n\t [Mahasiswa -1]");
+						show(M1);
+					}
+					if(!isEmpty(M2)){
+						printf("\n\n\t [Mahasiswa -2]");
+						show(M2);
+					}
+				}else
+					printf("\n\t [!] Data mahasiswa masih kosong");
+				
+					break;
+			case 4:
+				if(!isEmpty(M2)){
+					show(M2);
+					printf("\nApakah anda yakin ingin menghapus data(YES/NO) ?");fflush(stdin);gets(confirm);
+					if(strcmpi(confirm,"YES")==0){
+						init(&M2);
+						printf("\n\t [!] Berhasil hapus data mahasiswa 2");
+					}
+				}else
+					printf("\n\t [!] Data mahasiswa masih kosong");
+					
+					break;
+			case 0:
+				printf("\n\t [!] Thank you");
+				break;
+			default:
+				printf("\n\t [!] Tidak ada dalam pilihan");
+				break;
+		}
+		getch();
+	}while(menu!=0);
+	return 0;
+}
+
+void init(Mahasiswa *M){
+	strcpy((*M).nama,"-");
+	strcpy((*M).npm,"-");
+	(*M).umur=0;
+}
+
+void data(Mahasiswa *M){
+	
+	strcpy((*M).nama,"Paulus Pandu Windito");
+	strcpy((*M).npm,"200710755");
+	(*M).umur=18;
+
+}
+
+void input(Mahasiswa *M){
+	do{
+		printf("\n\t Masukan Nama :");fflush(stdin);gets((*M).nama);
+		if(strcmpi((*M).nama,"-")==0||strlen((*M).nama)<=0){
+			printf("\n\t [!] Nama tidak boleh kosong");
+		}
+			
+	}while(strcmpi((*M).nama,"-")==0||strlen((*M).nama)<=0);
+	
+	do{
+		printf("\n\t Masukan NPM :");fflush(stdin);gets((*M).npm);
+		if(strcmpi((*M).npm,"-")==0||strlen((*M).npm)!=9){
+			printf("\n\t [!] NPM harus 9 digit");
+		}
+	}while(strcmpi((*M).npm,"-")==0||strlen((*M).npm)!=9);
+	
+	do{
+		printf("\n\t Masukan Umur :");scanf("%d", &(*M).umur);
+		if((*M).umur <=16){
+			printf("\n\t [!] Umur harus di atas 16 tahun");
+		}
+	}while ((*M).umur<=16);
+}
+
+void show(Mahasiswa M){
+	printf("\n\t Nama	: %s",M.nama);
+	printf("\n\t NPM	: %s",M.npm);
+	printf("\n\t Umur	: %d",M.umur);
+}
+
+int isEmpty(Mahasiswa M){
+	return strcmpi(M.nama,"-")==0;
+}
+
+int isAllEmpty(Mahasiswa M1, Mahasiswa M2){
+	return isEmpty(M1) || isEmpty(M2);
+}
+
+int isFound(Mahasiswa M, string search){
+	return strcmpi(M.nama,search)==0;
+}
