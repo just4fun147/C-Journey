@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define max 10
+//Paulus Pandu Windito-B-200710755//
+
+void init(int arr[]){
+	int i;
+	for(i=0;i<max;i++){
+		arr[i] = (i+1)*10;
+	}
+}
+
+int cariData(int arr[], int input) {
+	int i;
+	for(i=0;i<max;i++){
+		if (arr[i]==input){
+			return i;
+		}
+	}
+	return -1;
+}
+
+int main(int argc,char *argv[]){
+	int arr[max]= {1,23,5,6,7,7,3,2,1,10};
+	int i;
+	int input;
+	printf("%d:",arr[100]);
+	printf("Sebelum Inisialisasi\n");
+	for(i=0;i<max;i++){
+		printf("Data - %d : %d\n",i,arr[i]);
+	}
+	
+	init (arr);
+	printf("Setelah Inisialisai\n");
+	for(i=0;i<max;i++){
+		printf("Data - %d : %d\n",i,arr[i]);
+	}
+	
+	printf("nilai yang ingin dicari:");scanf("%d", &input);
+	
+	if(cariData(arr,input)==-1){
+		printf("\t[!] data tidak ditemukan\n");
+	}else{
+		printf("Data %d ada di indeks ke %d\n",input,cariData(arr,input));
+	}
+	return 0;
+}

@@ -1,0 +1,227 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+//Paulus Pandu Windito-B-200710755//
+typedef char string [100];
+
+
+
+
+int main(int argc, char *argv[]) {	
+	int pil,a,i,j,z,pil2,x,y,akun,temp,k;
+	string garasi[4],member[5],user,pass,tampilMember,keluar;
+	i=0;
+	z=0;
+	x=0;
+	akun=0;
+	temp=0;
+	strcpy(tampilMember,"");
+	strcpy(garasi,"-");
+	int random[4]={0,0,0,0};
+	menu:
+	system("cls");
+	printf("-----------Garasi Toreto------------");
+	printf("\nUser Anda:%s",tampilMember);
+	printf("\n[1] Register Member");
+	printf("\n[2] Login/Logout Member");
+	printf("\n[3] Akses Garasi");
+	printf("\n[4] Tampil Data");
+	printf("\n[5] Edit Data");
+	printf("\n[6] Hapus Data");
+	printf("\n[7] Hitung Pembersihan");
+	printf("\n[8] Urut Data(BONUS)");
+	printf("\n[0] Exit");
+	printf("\n>>>");scanf("%d", &pil);
+	
+	switch(pil){
+	
+		case 1:
+			if(y!=1){
+						if(i>4){
+					printf("\t[!] Data Member penuh");
+					getch();
+					goto menu;
+				}else{
+				printf("Username member:");fflush(stdin);gets(user);
+				if(strcasecmp(user,member)==0){
+					printf("\t[!]Username sudah ada");
+				}else{
+					strcpy(member[i],user);
+				printf("\t[!] Data Berhasil Masuk");
+				}
+				
+				i++;
+				z=1;
+				getch();
+				goto menu;
+				}
+			}else{
+				printf("\t[!] Tidak dapat diakses oleh member");
+				getch();
+				goto menu;
+			}
+		
+			
+		case 2:
+			printf("Username:");fflush(stdin);gets(user);
+			for(i=0;i<5;i++){
+				if(strcasecmp(user,member[i])==0){
+					printf("\t[!] Berhasil LOGIN");
+					strcpy(tampilMember,member[akun]);
+					akun=i;
+					a=1;
+					y=1;
+					getch();
+					goto menu;
+				}else{
+					printf("\t[!] Data tidak ditemukan");
+					getch();
+					goto menu;
+				}
+				
+			}
+		case 3:
+			if(z==0){
+				printf("\t[!] Data Member Kosong");
+				getch();
+				goto menu;
+			}else {
+				if(y==0){
+				printf("\t[!] Belum LOGIN");
+				getch();
+				goto menu;
+				}else{
+					printf("\t[1] Masuk Garasi");
+					printf("\n\t[2] Keluar Garasi");
+					printf("\n\t>>>");scanf("%d", &pil2);
+					switch(pil2){
+						case 1:
+							if(x==1){
+								printf("\t[!] User sudah mendapat garasi");
+								getch();
+								goto menu;
+							}else{
+							
+							printf("Garasi yang tersedia :");
+							for(i=0;i<4;i++){
+								j=i+1;
+								printf("\nGarasi -%d",j);
+							}
+							printf("\nGarasi yang dipilih:");fflush(stdin);gets(garasi[akun]);
+							x=1;
+							getch();
+							goto menu;
+							}
+						case 2:
+							if(x==0){
+								printf("\t[!] User Belum memiliki garasi");
+								getch();
+								goto menu;
+							}else{
+								printf("User berada di Garasi %s",garasi[akun]);
+								printf("\nYakin Ingin Keluar? [y/t]");fflush(stdin);gets(keluar);
+								if(strcasecmp(keluar,"y")==0){
+									strcpy(garasi[akun],"-");
+									printf("\t[!] Berhasil Keluar");
+									x=0;
+									getch();
+									goto menu;
+								}else{
+								getch();
+								goto menu;
+								}
+							}
+							
+					}
+				}
+			}
+		case 4:
+			if(z==0){
+				printf("\t[!] Data Member Kosong");
+				getch();
+				goto menu;
+			}else {
+			for(j=0;j<akun+1;j++){
+				printf("username: %s",member[j]);
+				printf("\nKomputer:%s",garasi[j]);
+				printf("\n\n");
+			}
+			}
+			getch();
+			goto menu;
+		case 5:
+			if(z==0){
+				printf("\t[!] Data Member Kosong");
+				getch();
+				goto menu;
+			}else {
+				if(y==0){
+				printf("\t[!] Belum LOGIN");
+				getch();
+				goto menu;
+				}else{
+			printf("Username Baru:");fflush(stdin);gets(user);
+			strcpy(member[akun],user);
+			printf("\t[!] Data Berhasil diperbarui");
+			strcpy(tampilMember,member[akun]);
+			getch();
+			goto menu;
+			}
+		}
+		case 6:
+			if(z==0){
+				printf("\t[!] Data Member Kosong");
+				getch();
+				goto menu;
+			}else {
+				if(y==0){
+				printf("\t[!] Belum LOGIN");
+				getch();
+				goto menu;
+				}else{
+					if(x==1){
+						printf("\t[!] User masih terdaftar dalam garasi");
+						getch();
+						goto menu;
+					}else{
+						printf("\t[!] Berhasil menghapus member");
+						strcpy(member[akun],"-");
+						strcpy(tampilMember,"");
+						z=0;
+						y=0;
+						x=0;
+						getch();
+						goto menu;
+					}
+				}
+			}
+		case 7:
+			random[0]=rand()%10+1;
+			random[1]=rand()%10+1;
+			random[2]=rand()%10+1;
+			random[3]=rand()%10+1;
+			
+			printf("Biaya Pembersihan: %d,%d,%d,%d",random[0],random[1],random[2],random[3]);
+			printf("\nBiaya Pembersihan:%d,%d,%d,%d",random[0],random[1]+random[0],random[2]+random[0]+random[1],random[3]+random[0]+random[1]+random[2]);
+			getch();
+			goto menu;
+
+			
+	    case 8:
+	    case 0:
+	    	getch();
+	    	return 0;
+		default:
+			getch();
+			goto menu;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
