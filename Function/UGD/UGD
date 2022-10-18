@@ -1,0 +1,376 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//Paulus Pandu Windito-B-200710755//
+typedef char string [1000];
+
+int cekLog(string user, string pass);
+void tampilMenuUtama(int pil,int a,int pil2,int sayur,int bumbu,int sapi,int ayam,int *antrian,int *cekLog,string user,string pass,string nama,string opsi,int opsi4,int opsi5,int tambah);
+void loginUser(string user,string pass,int log);
+void tampilData(int *sayur,int *bumbu,int *sapi,int *ayam);
+void hapusData(int *sayur,int *bumbu,int *sapi,int *ayam,string nama,int *antrian,int *a);
+void hitungTotalHarga(int sayur, int bumbu,int sapi,int ayam,string opsi);
+float totalHarga(float hSayur,float hBumbu, float hSapi,float hAyam);
+float pajak(float totalHarga);
+float diskon(float totalHarga);
+float totalBayar(float totalHarga,float pajak);
+float kembali(float bayar,float totalBayar);
+float member(float totalBayar);
+
+
+int main(int argc, char *argv[]) {	
+	int pil,cekLog,a,pil2,sayur,bumbu,sapi,ayam,antrian,log,opsi4,opsi5,tambah;
+	string user,pass,nama,opsi;
+	
+	tampilMenuUtama(pil,a,pil2,sayur,bumbu,sapi,ayam,&antrian,&cekLog,user,pass,nama,opsi,opsi4,opsi5,tambah);
+	
+
+	return 0;
+}
+
+
+
+
+
+void tampilMenuUtama(int pil,int a,int pil2,int sayur,int bumbu,int sapi,int ayam,int *antrian,int *log,string user,string pass,string nama,string opsi,int opsi4,int opsi5,int tambah){
+	a=0;
+	sayur=0;
+	bumbu=0;
+	sapi=0;
+	ayam=0;
+
+	
+	menu:
+	system("cls");
+	printf("\n\t====== HAPPY FRESH ======");
+	printf("\n\t[1] Login");
+	printf("\n\t[2] Input Pemesanan");
+	printf("\n\t[3] Pembayaran");
+	printf("\n\t[4] Batalkan Pesanan");
+	printf("\n\t[5] [TUGAS] Edit Pesanan");
+	printf("\n\t[ESC] Keluar ");
+	printf("\n\tPilih Menu >>");scanf("%d", &pil);
+	
+	switch(pil){
+		case 1:
+			loginUser(user,pass,log);
+			a=1;
+			getch();
+			goto menu;
+		case 2:
+			if(a!=1){
+				printf("\t[!] Tidak Bisa Diakses[!]");
+				getch();
+				goto menu;
+				
+				
+			}else{	
+			input:
+			system("cls");
+			printf("\t\t HAPPY FRESH MENU");
+			printf("\n\n\t[1] Paket Sayuran		Rp 30.000,00");
+			printf("\n\t[2] Paket Bumbu Dapur		Rp 60.000,00");
+			printf("\n\t[3] Daging Sapi /kg		Rp 95.000,00");
+			printf("\n\t[4] Daging Ayam /kg		Rp 45.000,00");
+			printf("\n\t[0] Keluar");
+			printf("\n\tMasukan Pilihan >>>>>");scanf("%d", &pil2);
+			
+			switch(pil2){
+							case 1:
+								printf("\tMasukan Jumlah Sayur:");scanf("%d",&sayur);
+								goto input;
+							case 2:
+								printf("\tMasukan Jumlah Bumbu:");scanf("%d",&bumbu);
+								goto input;
+							case 3:
+								printf("\tMasukan Jumlah Daging Sapi:");scanf("%d",&sapi);
+								goto input;
+							case 4:
+								printf("\tMasukan Jumlah Daging Ayam:");scanf("%d",&ayam);
+								goto input;
+							case 0:
+								data:
+								printf("\tMasukan Nama	:");fflush(stdin);gets(nama);
+								printf("\tMasukan NO Antrian[1-25 genap]:");scanf("%d",antrian);
+									if(*antrian%2 !=0){
+									printf("\tNomor Antrian harus 1-25 dan bernilai genap!\n");
+										getch();
+										goto data;
+									}else if(*antrian>25){
+										printf("\tNomor Antrian harus 1-25 dan bernilai genap!\n");
+										goto data;
+									}else if(*antrian<1){
+										printf("\tNomor Antrian harus 1-25 dan bernilai genap!\n");
+										goto data;
+									}else{
+										printf("\t[TUGAS] Apakah Pelanggan merupakan member???[Y/N]");
+										printf(">>> ");fflush(stdin);gets(opsi);
+										printf("\n\n");
+										tampilData(&sayur,&bumbu,&sapi,&ayam);
+										a=2;
+										getch();
+										goto menu;
+									}
+									
+							default:
+								
+								goto input;
+						}
+			}
+		case 3:
+				if(a!=2){
+				printf("\t[!] Tidak Bisa Diakses[!]");
+				getch();
+				goto menu;
+				
+				
+			}else{
+				printf("\t\tRINCIAN PEMBAYARAN");
+				printf("\n\t======================");
+				printf("\n\tNama		:%s",nama);
+				printf("\n\tNo meja		:%d",*antrian);
+				printf("\n\t\tRINCIAN PESANAN");
+				printf("\n\t======================");
+				tampilData(&sayur,&bumbu,&sapi,&ayam);
+				hitungTotalHarga(sayur,bumbu,sapi,ayam,opsi);
+				
+			}a=3;
+				getch();
+				goto menu;
+		case 4:
+				if(a!=3){
+				printf("\t[!] Tidak Bisa Diakses[!]");
+				getch();
+				goto menu;
+				
+				
+				}else{
+				hapusData(&sayur,&bumbu,&sapi,&ayam,nama,&antrian,&a);
+				goto menu;
+			}
+		
+		case 5:
+			if(a!=2){
+				printf("\t[!] Tidak Bisa Diakses[!]");
+				getch();
+				goto menu;
+				
+				
+				}else{
+					edit:
+					system("cls");
+					printf("\tUbah Data");
+					printf("\n\t=========================================");
+					tampilData(&sayur,&bumbu,&sapi,&ayam);
+					printf("\n\t=========================================");
+					printf("\n\t[0]Selesai");
+					printf("\n\n\tMasukan pilihan>>>");scanf("%d", &opsi4);
+					switch(opsi4){
+						case 1:
+							printf("\n\n\t[1] Tambah Menu");
+							printf("\n\t[2] Kurangi Menu");
+							printf("\n\n\tMasukan Pilihan>>>");scanf("%d", &opsi5);
+								if(opsi5==1){
+									printf("\n\tMasukan Jumlah Tambah :");scanf("%d", &tambah);
+									sayur=sayur+tambah;
+								}else if(opsi5==2){
+									if(sayur!=0){
+									printf("\n\tMasukan Jumlah Kurang :");scanf("%d", &tambah);
+									if(tambah>sayur){
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}else{sayur=sayur-tambah;
+									}
+									}else{
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}
+									
+								}goto edit;
+						case 2:
+								printf("\n\n\t[1] Tambah Menu");
+								printf("\n\t[2] Kurangi Menu");
+								printf("\n\n\tMasukan Pilihan>>>");scanf("%d", &opsi5);
+								if(opsi5==1){
+									printf("\n\tMasukan Jumlah Tambah :");scanf("%d", &tambah);
+									bumbu=bumbu+tambah;
+								}else if(opsi5==2){
+									if(bumbu!=0){	printf("\n\tMasukan Jumlah Kurang :");scanf("%d", &tambah);
+										if(tambah>bumbu){
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}else{bumbu=bumbu-tambah;
+									}
+									}else{
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}
+								
+								}goto edit;
+						case 3:
+								printf("\n\n\t[1] Tambah Menu");
+								printf("\n\t[2] Kurangi Menu");
+								printf("\n\n\tMasukan Pilihan>>>");scanf("%d", &opsi5);
+								if(opsi5==1){
+									printf("\n\tMasukan Jumlah Tambah :");scanf("%d", &tambah);
+									sapi=sapi+tambah;
+								}else if(opsi5==2){
+									if(sapi!=0){
+											printf("\n\tMasukan Jumlah Kurang :");scanf("%d", &tambah);
+									if(tambah>sapi){
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}else{sapi=sapi-tambah;
+									}
+									}else{
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}
+								}goto edit;
+						case 4:
+								printf("\n\n\t[1] Tambah Menu");
+								printf("\n\t[2] Kurangi Menu");
+								printf("\n\n\tMasukan Pilihan>>>");scanf("%d", &opsi5);
+								if(opsi5==1){
+									printf("\n\tMasukan Jumlah Tambah :");scanf("%d", &tambah);
+									ayam=ayam+tambah;
+								}else if(opsi5==2){
+									if(ayam!=0){
+											printf("\n\tMasukan Jumlah Kurang :");scanf("%d", &tambah);
+									if(tambah>ayam){
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}else{ayam=ayam-tambah;
+									}
+									}else{
+										printf("\tJumlah tidak sesuai!");
+										getch();
+									}
+								}goto edit;
+						case 0:
+							goto menu;
+						default:
+							goto edit;
+					}
+			}
+	}
+}
+
+
+void loginUser(string user,string pass,int log){
+		
+		while(log!=2){	
+			printf("\tUsername:");fflush(stdin);gets(user);
+			printf("\tPassword:");fflush(stdin);gets(pass);
+			log=cekLog(user,pass);
+			}
+			
+}
+
+int cekLog(string user, string pass){
+	
+	if(strcmp(user,"happy")==0){
+		if(strcmp(pass,"fresh")==0){
+			printf("\tAnda Berhasil Login!");
+			return 2;
+			}else{
+				printf("\tUsername/Password Salah!\n");
+			}
+		}else{
+			printf("\tUsername/Password Salah!\n");
+
+		}
+	}
+	
+void tampilData(int *sayur,int *bumbu,int *sapi,int *ayam){
+	printf("\n\n\t=======================================");
+	printf("\n\t[1] Jumlah Sayuran		:%d",*sayur);
+	printf("\n\t[2] Jumlah Bumbu Dapur		:%d",*bumbu);
+	printf("\n\t[3] Jumlah Daging Sapi		:%d",*sapi);
+	printf("\n\t[4] Jumlah Daging Ayam		:%d",*ayam);
+	printf("\n\t=======================================");
+}
+
+
+
+
+
+void hapusData(int *sayur,int *bumbu,int *sapi,int *ayam,string nama,int *antrian,int *a){
+	string opsi3;
+	printf("Apakah anda yakin ingin menghapus data ??[Y/N]");
+	printf("\n>>>");fflush(stdin);gets(opsi3);
+	if(strcmp(opsi3,"Y")){
+		*sayur=0;
+		*bumbu=0;
+		*sapi=0;
+		*ayam=0;
+		strcpy(nama,"");
+		*antrian=0;
+		*a=0;
+	}else if(strcmp(opsi3,"y")){
+		*sayur=0;
+		*bumbu=0;
+		*sapi=0;
+		*ayam=0;
+		strcpy(nama,"");
+		*antrian=0;
+		*a=0;
+	}else{
+		getch();
+	}
+	
+}
+
+void hitungTotalHarga(int sayur, int bumbu,int sapi,int ayam,string opsi){
+	float hSayur,hBumbu,hSapi,hAyam,bayar;
+	string opsi2;
+	hSayur=30000*sayur;
+	hBumbu=60000*bumbu;
+	hSapi=95000*sapi;
+	hAyam=45000*ayam;
+	printf("\n\n\tTotal Harga		:Rp.%.2f",totalHarga(hSayur,hBumbu,hSapi,hAyam));
+	printf("\n\tPajak			:Rp.%.2f",pajak(totalHarga(hSayur,hBumbu,hSapi,hAyam)));
+	if(strcmp(opsi,"Y")==0){
+
+		printf("\n\t[TUGAS] Diskon Member	:Rp.%.2f",member(totalBayar(totalHarga(hSayur,hBumbu,hSapi,hAyam),pajak(totalHarga(hSayur,hBumbu,hSapi,hAyam)))));
+	}else if(strcmp(opsi,"y")==0){
+		printf("\n\t[TUGAS] Diskon Member	:Rp.%.2f",member(totalBayar(totalHarga(hSayur,hBumbu,hSapi,hAyam),pajak(totalHarga(hSayur,hBumbu,hSapi,hAyam)))));
+	}
+	printf("\n\tTotal Bayar		:Rp.%.2f",totalBayar(totalHarga(hSayur,hBumbu,hSapi,hAyam),pajak(totalHarga(hSayur,hBumbu,hSapi,hAyam))));
+	printf("\n\t=======================================");
+	printf("\n\tLanjutkan Pembayaran ??[y/n]");
+	printf(">>>");fflush(stdin);gets(opsi2);
+	if(strcmp(opsi2,"y")==0){
+	printf("\n\tMasukan Uang	:Rp.");scanf("%f", &bayar);
+	printf("\n\tKembalian		:Rp.%.2f",kembali(bayar,totalBayar(totalHarga(hSayur,hBumbu,hSapi,hAyam),pajak(totalHarga(hSayur,hBumbu,hSapi,hAyam)))));
+	printf("\n\t=======================================");
+	printf("\n\t\tPEMBAYARAN BERHASIL!!");
+	printf("\n\t=======================================");
+	}else{
+	}
+}
+
+float totalHarga(float hSayur,float hBumbu, float hSapi,float hAyam){
+	
+	return hSayur+hBumbu+hSapi+hAyam;
+}
+
+float pajak(float totalHarga){
+	return totalHarga*0.15;
+}
+
+float totalBayar(float totalHarga,float pajak){
+	return totalHarga+pajak;
+}
+
+float diskon(float totalHarga){
+	return totalHarga*0.25;
+}
+float kembali(float bayar,float totalBayar){
+	return bayar-totalBayar;
+}
+
+float member(float totalBayar){
+	return totalBayar*5/100;
+}

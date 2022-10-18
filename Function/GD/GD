@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define phi 3.14
+
+//Paulus Pandu Windito-B-200710755//
+float volumeTabung(float jari,float tinggi);
+float luasPermukaanTabung(float jari,float tinggi);
+
+int main(int argc, char *argv[]) {
+	char menu;
+	float jari,tinggi;
+	
+	do{
+		system("cls");
+		system("color 70");
+		printf("\n\t======== GUIDED FUNGSI ========\n\n");
+		printf("\t[1] Input Data Kerucut\n");
+		printf("\t[2] Hitung Volume Tabung\n");
+		printf("\t[3] Hitung Luas Permukaan Tabung\n");
+		printf("\tMasukan Pilihan >>> ");menu=getch();
+		
+			switch(menu){
+			
+				case '1':
+					printf("\n\n\tInput Data Tabung");
+					printf("\n\n\tMasukan Jari-jari	:");scanf("%f", &jari);
+					printf("\tMasukan Tinggi		:");scanf("%f", &tinggi);
+					printf("\n\tInput Data Berhasil!");
+					getch();
+					break;
+					
+				case '2':
+					printf("\n\n\tMenghitung Volume Tabung");
+					printf("\n\t=========================================");
+					printf("\n\tVolume Tabung adalah : %.2f",volumeTabung(jari,tinggi));
+					getch();
+					break;
+					
+				case '3':
+					printf("\n\n\tMenghitung Luas Permukaan Tabung");
+					printf("\n\t==========================================");
+					printf("\n\tLuas Permukaan Tabung adalah : %.2f",luasPermukaanTabung(jari,tinggi));
+					getch();
+					break;
+			} 
+			
+	}while(menu!=27);
+	return 0;
+}
+
+float volumeTabung(float jari,float tinggi){
+	return phi*jari*jari*tinggi;
+}
+
+float luasPermukaanTabung(float jari,float tinggi){
+	return 2*phi*jari*jari*(jari+tinggi);
+}
